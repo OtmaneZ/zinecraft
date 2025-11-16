@@ -5,7 +5,7 @@ services:
   # PaperMC Server
   # ==========================================
   papermc:
-    image: itzg/minecraft-server:java17
+    image: itzg/minecraft-server:java21
     container_name: zinecraft-papermc
     restart: unless-stopped
     ports:
@@ -14,7 +14,7 @@ services:
     environment:
       EULA: "TRUE"
       TYPE: "PAPER"
-      VERSION: "1.20.4"
+      VERSION: "1.21"
       MEMORY: "4G"
       SERVER_NAME: "ZineCraft Server"
       MOTD: "§6§l🎮 ZineCraft §r§7- Serveur Premium"
@@ -60,8 +60,8 @@ services:
     container_name: zinecraft-portainer
     restart: unless-stopped
     ports:
-      - "9000:9000"
-      - "8000:8000"
+      - "9001:9000"
+      - "9002:8000"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - portainer-data:/data
@@ -76,7 +76,7 @@ services:
     container_name: zinecraft-phpmyadmin
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "9003:80"
     environment:
       PMA_HOST: mysql
       PMA_USER: zinecraft_user
