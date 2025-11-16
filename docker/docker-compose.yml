@@ -22,7 +22,7 @@ services:
       DIFFICULTY: normal
       MODE: survival
       PVP: "true"
-      ONLINE_MODE: "true"
+      ONLINE_MODE: "false"  # false = pas besoin de compte Mojang (DEV only)
       ENABLE_RCON: "true"
       RCON_PASSWORD: "zinecraft2025"
     volumes:
