@@ -69,9 +69,15 @@ server/.rcon-cli.yaml
 # Dossiers du serveur
 server/plugins/*.jar
 server/plugins/*/
-server/world/
-server/world_nether/
-server/world_the_end/
+
+# Monde - On garde les fichiers essentiels, pas les temporaires
+server/world/session.lock
+server/world/level.dat_old
+server/world_nether/session.lock
+server/world_nether/level.dat_old
+server/world_the_end/session.lock
+server/world_the_end/level.dat_old
+
 server/logs/
 server/crash-reports/
 server/cache/

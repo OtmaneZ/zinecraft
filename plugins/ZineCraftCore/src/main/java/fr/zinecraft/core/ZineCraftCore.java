@@ -6,14 +6,17 @@ import org.bukkit.ChatColor;
 import fr.zinecraft.core.listeners.BlockBreakListener;
 import fr.zinecraft.core.listeners.PlayerJoinListener;
 import fr.zinecraft.core.listeners.ParkourListener;
+import fr.zinecraft.core.listeners.BossListener;
 import fr.zinecraft.core.commands.CombatCommand;
 import fr.zinecraft.core.commands.Combat1v1Command;
 import fr.zinecraft.core.commands.Combat2v2Command;
 import fr.zinecraft.core.commands.ParkourCommand;
 import fr.zinecraft.core.commands.SpawnCommand;
 import fr.zinecraft.core.commands.UnstuckCommand;
+import fr.zinecraft.core.commands.BossCommand;
 import fr.zinecraft.core.arena.ArenaManager;
 import fr.zinecraft.core.parkour.ParkourManager;
+import fr.zinecraft.core.boss.BossManager;
 
 /**
  * ZineCraft Core Plugin
@@ -29,6 +32,7 @@ public class ZineCraftCore extends JavaPlugin {
     // Managers
     private ArenaManager arenaManager;
     private ParkourManager parkourManager;
+    private BossManager bossManager;
 
     // Managers (à créer plus tard)
     // private DatabaseManager databaseManager;
@@ -64,6 +68,7 @@ public class ZineCraftCore extends JavaPlugin {
         // 3. Enregistrer les managers
         arenaManager = new ArenaManager(this);
         parkourManager = new ParkourManager();
+        bossManager = new BossManager(this);
         logSuccess("Managers initialized!");
 
         // 4. Enregistrer les commandes
@@ -116,6 +121,13 @@ public class ZineCraftCore extends JavaPlugin {
     }
 
     /**
+     * Récupérer le BossManager
+     */
+    public BossManager getBossManager() {
+        return bossManager;
+    }
+
+    /**
      * Enregistrer toutes les commandes
      */
     private void registerCommands() {
@@ -125,6 +137,7 @@ public class ZineCraftCore extends JavaPlugin {
         getCommand("parkour").setExecutor(new ParkourCommand());
         getCommand("spawn").setExecutor(new SpawnCommand());
         getCommand("unstuck").setExecutor(new UnstuckCommand());
+        getCommand("boss").setExecutor(new BossCommand());
     }
 
     /**
@@ -134,6 +147,7 @@ public class ZineCraftCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
         getServer().getPluginManager().registerEvents(new ParkourListener(), this);
+        getServer().getPluginManager().registerEvents(new BossListener(), this);
     }
 
     /**

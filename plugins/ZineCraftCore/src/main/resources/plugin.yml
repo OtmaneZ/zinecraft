@@ -7,6 +7,9 @@ author: Otmane & Adam
 website: https://zinecraft.fr
 
 commands:
+  boss:
+    description: Faire apparaître un boss
+    usage: /boss [titan|dragon|demon]
   unstuck:
     description: Se sortir d'un trou
     usage: /unstuck
