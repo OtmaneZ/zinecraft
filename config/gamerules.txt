@@ -1,0 +1,31 @@
+# ==========================================
+# ZineCraft - Game Rules Configuration
+# ==========================================
+# Format: une commande complète par ligne
+
+# Cycle jour/nuit désactivé + jour éternel
+gamerule doDaylightCycle false
+time set 1000
+
+# Météo fixe
+gamerule doWeatherCycle false
+weather clear
+
+# Spawn et gameplay
+gamerule keepInventory true
+gamerule doImmediateRespawn false
+
+# Mobs
+gamerule doMobSpawning true
+gamerule doPatrolSpawning false
+gamerule doTraderSpawning false
+
+# Protection du monde
+gamerule doFireTick false
+gamerule mobGriefing false
+
+# Interface
+gamerule announceAdvancements true
+gamerule showDeathMessages true
+gamerule commandBlockOutput false
+gamerule sendCommandFeedback true

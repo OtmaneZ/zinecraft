@@ -1,0 +1,9 @@
+# ==========================================
+# ZineCraft - Spawn Configuration
+# ==========================================
+
+# Position du spawn
+setworldspawn 0 100 35
+
+# Gamemode par défaut
+defaultgamemode survival
