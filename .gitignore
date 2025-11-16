@@ -70,13 +70,15 @@ server/.rcon-cli.yaml
 server/plugins/*.jar
 server/plugins/*/
 
-# Monde - On garde les fichiers essentiels, pas les temporaires
-server/world/session.lock
-server/world/level.dat_old
-server/world_nether/session.lock
-server/world_nether/level.dat_old
-server/world_the_end/session.lock
-server/world_the_end/level.dat_old
+# Monde - Ignorer TOUT le contenu des mondes (données de jeu)
+server/world/**
+server/world_nether/**
+server/world_the_end/**
+
+# Mais garder les dossiers vides pour la structure
+!server/world/.gitkeep
+!server/world_nether/.gitkeep
+!server/world_the_end/.gitkeep
 
 server/logs/
 server/crash-reports/
