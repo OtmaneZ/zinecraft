@@ -70,13 +70,15 @@ server/.rcon-cli.yaml
 server/plugins/*.jar
 server/plugins/*/
 
-# Monde - On garde les fichiers essentiels, pas les temporaires
-server/world/session.lock
-server/world/level.dat_old
-server/world_nether/session.lock
-server/world_nether/level.dat_old
-server/world_the_end/session.lock
-server/world_the_end/level.dat_old
+# Monde - NE PAS versionner les fichiers du monde (trop volumineux)
+server/world/
+server/world_nether/
+server/world_the_end/
+
+# Sauf si tu veux garder des backups spécifiques (décommenter si besoin)
+# !server/world/level.dat
+# !server/world_nether/level.dat
+# !server/world_the_end/level.dat
 
 server/logs/
 server/crash-reports/
