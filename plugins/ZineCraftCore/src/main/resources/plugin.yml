@@ -7,6 +7,15 @@ author: Otmane & Adam
 website: https://zinecraft.fr
 
 commands:
+  combat:
+    description: Ouvrir le menu de combat
+    usage: /combat
+  combat1v1:
+    description: Rejoindre le mode 1v1
+    usage: /combat1v1
+  combat2v2:
+    description: Rejoindre le mode 2v2
+    usage: /combat2v2
   zc:
     description: Commande principale ZineCraft
     usage: /zc <help|reload|stats>

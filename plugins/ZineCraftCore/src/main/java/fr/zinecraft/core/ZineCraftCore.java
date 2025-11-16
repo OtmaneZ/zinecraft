@@ -3,6 +3,12 @@ package fr.zinecraft.core;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import fr.zinecraft.core.listeners.BlockBreakListener;
+import fr.zinecraft.core.listeners.PlayerJoinListener;
+import fr.zinecraft.core.commands.CombatCommand;
+import fr.zinecraft.core.commands.Combat1v1Command;
+import fr.zinecraft.core.commands.Combat2v2Command;
+import fr.zinecraft.core.arena.ArenaManager;
 
 /**
  * ZineCraft Core Plugin
@@ -14,6 +20,9 @@ import org.bukkit.ChatColor;
 public class ZineCraftCore extends JavaPlugin {
 
     private static ZineCraftCore instance;
+
+    // Managers
+    private ArenaManager arenaManager;
 
     // Managers (à créer plus tard)
     // private DatabaseManager databaseManager;
@@ -47,15 +56,15 @@ public class ZineCraftCore extends JavaPlugin {
         logSuccess("Database connected!");
 
         // 3. Enregistrer les managers
-        // TODO: Initialiser les managers
+        arenaManager = new ArenaManager(this);
         logSuccess("Managers initialized!");
 
         // 4. Enregistrer les commandes
-        // TODO: Créer et enregistrer les commandes
+        registerCommands();
         logSuccess("Commands registered!");
 
         // 5. Enregistrer les listeners
-        // TODO: Créer et enregistrer les events
+        registerListeners();
         logSuccess("Listeners registered!");
 
         logInfo("");
@@ -83,6 +92,30 @@ public class ZineCraftCore extends JavaPlugin {
      */
     public static ZineCraftCore getInstance() {
         return instance;
+    }
+
+    /**
+     * Récupérer l'ArenaManager
+     */
+    public ArenaManager getArenaManager() {
+        return arenaManager;
+    }
+
+    /**
+     * Enregistrer toutes les commandes
+     */
+    private void registerCommands() {
+        getCommand("combat").setExecutor(new CombatCommand());
+        getCommand("combat1v1").setExecutor(new Combat1v1Command());
+        getCommand("combat2v2").setExecutor(new Combat2v2Command());
+    }
+
+    /**
+     * Enregistrer tous les listeners
+     */
+    private void registerListeners() {
+        getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
     }
 
     /**
