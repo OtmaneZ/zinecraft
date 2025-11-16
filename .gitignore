@@ -19,6 +19,13 @@ bin/
 *.ipr
 *.iws
 
+# Gradle Wrapper (installation locale)
+gradle-*/
+gradlew
+gradlew.bat
+gradle/wrapper/gradle-wrapper.jar
+**/gradle/wrapper/
+
 # ============== IDE ==============
 # IntelliJ IDEA
 .idea/
@@ -42,20 +49,33 @@ dist/
 nbdist/
 
 # ============== Minecraft Server ==============
-server/plugins/*.jar
-server/world/
-server/world_nether/
-server/world_the_end/
-server/logs/
-server/crash-reports/
-server/cache/
+# Fichiers générés par le serveur
 server/*.jar
+server/*.json
+server/*.yaml
+server/*.yml
 server/eula.txt
 server/banned-*.json
 server/ops.json
 server/usercache.json
 server/whitelist.json
 server/permissions.yml
+server/commands.yml
+server/help.yml
+server/server.properties
+server/.papermc-manifest.json
+server/.rcon-cli.yaml
+
+# Dossiers du serveur
+server/plugins/*.jar
+server/plugins/*/
+server/world/
+server/world_nether/
+server/world_the_end/
+server/logs/
+server/crash-reports/
+server/cache/
+server/config/
 
 # Keep plugins folder but not JARs
 !server/plugins/.gitkeep
