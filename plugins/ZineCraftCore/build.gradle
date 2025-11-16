@@ -1,0 +1,87 @@
+plugins {
+    id 'java'
+    id 'com.gradleup.shadow' version '9.2.2'
+}
+
+group = 'fr.zinecraft'
+version = '1.0.0-SNAPSHOT'
+description = 'ZineCraft Core Plugin'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+
+    // Spigot/Paper API
+    maven {
+        name = 'papermc'
+        url = 'https://repo.papermc.io/repository/maven-public/'
+    }
+
+    // Autres repos utiles
+    maven {
+        name = 'sonatype'
+        url = 'https://oss.sonatype.org/content/groups/public/'
+    }
+}
+
+dependencies {
+    // Paper API
+    compileOnly 'io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT'
+
+    // MySQL Driver
+    implementation 'mysql:mysql-connector-java:8.0.33'
+
+    // HikariCP (Connection Pool)
+    implementation 'com.zaxxer:HikariCP:5.0.1'
+
+    // Lombok (optionnel, pour code plus propre)
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+
+    // Config library (optionnel)
+    // implementation 'org.spongepowered:configurate-yaml:4.1.2'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+processResources {
+    filteringCharset = 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand(
+            'version': project.version,
+            'name': project.name,
+            'description': project.description
+        )
+    }
+}
+
+shadowJar {
+    archiveClassifier.set('')
+    archiveFileName.set("${project.name}-${project.version}.jar")
+
+    // Relocate dependencies pour éviter conflits
+    relocate 'com.zaxxer.hikari', 'fr.zinecraft.core.libs.hikari'
+    relocate 'com.mysql', 'fr.zinecraft.core.libs.mysql'
+
+    // Minimiser le JAR
+    minimize()
+}
+
+build {
+    dependsOn shadowJar
+}
+
+// Task pour copier le JAR dans le dossier serveur
+task copyToServer(type: Copy) {
+    from shadowJar
+    into '../../server/plugins'
+}
+
+build.finalizedBy(copyToServer)

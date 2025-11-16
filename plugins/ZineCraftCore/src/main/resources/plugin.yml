@@ -1,0 +1,38 @@
+name: ZineCraftCore
+version: ${version}
+description: ${description}
+main: fr.zinecraft.core.ZineCraftCore
+api-version: 1.20
+author: Otmane & Adam
+website: https://zinecraft.fr
+
+commands:
+  zc:
+    description: Commande principale ZineCraft
+    usage: /zc <help|reload|stats>
+    aliases: [zinecraft]
+  skills:
+    description: Voir ses compétences
+    usage: /skills
+  quests:
+    description: Voir ses quêtes
+    usage: /quests
+  pets:
+    description: Gérer ses pets
+    usage: /pets
+
+permissions:
+  zinecraft.*:
+    description: Toutes les permissions ZineCraft
+    default: op
+    children:
+      zinecraft.admin: true
+      zinecraft.player: true
+
+  zinecraft.admin:
+    description: Permissions administrateur
+    default: op
+
+  zinecraft.player:
+    description: Permissions joueur de base
+    default: true

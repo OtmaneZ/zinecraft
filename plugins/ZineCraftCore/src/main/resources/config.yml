@@ -1,0 +1,75 @@
+# ==========================================
+# ZineCraft Core - Configuration
+# ==========================================
+
+# === Base de données ===
+database:
+  enabled: true
+  host: mysql
+  port: 3306
+  database: zinecraft
+  username: zinecraft_user
+  password: zinecraft_password_2025
+  pool:
+    maximum-pool-size: 10
+    minimum-idle: 2
+    connection-timeout: 10000
+
+# === Messages ===
+messages:
+  prefix: "&6&l[ZineCraft] &r"
+  join: "&aWelcome to ZineCraft, {player}!"
+  quit: "&c{player} left the game."
+  no-permission: "&cYou don't have permission to do that."
+
+# === Système de levels ===
+leveling:
+  enabled: true
+  base-xp: 100
+  multiplier: 1.5
+  max-level: 100
+
+# === Skills ===
+skills:
+  enabled: true
+  types:
+    - MINING
+    - COMBAT
+    - FARMING
+    - FISHING
+    - BUILDING
+
+# === Quêtes ===
+quests:
+  enabled: true
+  daily-reset: true
+  reset-time: "00:00"
+
+# === Pets ===
+pets:
+  enabled: true
+  max-pets-per-player: 5
+  default-pets:
+    - DOG
+    - CAT
+    - RABBIT
+
+# === Economy ===
+economy:
+  enabled: true
+  starting-coins: 100
+  currency-symbol: "⛁"
+
+# === Scoreboard ===
+scoreboard:
+  enabled: true
+  title: "&6&lZINECRAFT"
+  update-interval: 20
+
+# === Maintenance ===
+maintenance:
+  enabled: false
+  message: "&cServer is under maintenance!"
+  whitelist:
+    - "Otmane"
+    - "Adam"

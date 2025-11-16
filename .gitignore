@@ -1,0 +1,128 @@
+# ==========================================
+# ZineCraft - Gitignore
+# ==========================================
+
+# ============== Java & Gradle ==============
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.tmp
+*.bak
+.gradle/
+build/
+target/
+out/
+bin/
+*.iml
+*.ipr
+*.iws
+
+# ============== IDE ==============
+# IntelliJ IDEA
+.idea/
+*.iml
+.idea_modules/
+
+# Eclipse
+.classpath
+.project
+.settings/
+.metadata/
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# NetBeans
+nbproject/
+nbbuild/
+dist/
+nbdist/
+
+# ============== Minecraft Server ==============
+server/plugins/*.jar
+server/world/
+server/world_nether/
+server/world_the_end/
+server/logs/
+server/crash-reports/
+server/cache/
+server/*.jar
+server/eula.txt
+server/banned-*.json
+server/ops.json
+server/usercache.json
+server/whitelist.json
+server/permissions.yml
+
+# Keep plugins folder but not JARs
+!server/plugins/.gitkeep
+
+# ============== Docker ==============
+docker-compose.override.yml
+.env.local
+.env.*.local
+
+# ============== Database ==============
+*.db
+*.sqlite
+*.sql
+data/mysql/
+backups/*.sql
+
+# Keep backup folder
+!backups/.gitkeep
+
+# ============== Node.js (pour le web) ==============
+node_modules/
+npm-debug.log
+yarn-error.log
+.pnpm-debug.log
+.next/
+.nuxt/
+dist/
+.cache/
+
+# ============== OS ==============
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+.directory
+
+# ============== Secrets & Config ==============
+*.env
+.env
+*.pem
+*.key
+config.local.yml
+secrets/
+
+# ============== Logs & Temp ==============
+*.log
+logs/
+temp/
+tmp/
+*.swp
+*.swo
+
+# ============== Backups ==============
+*.backup
+*.old
+backups/*.zip
+backups/*.tar.gz
+
+# Keep structure
+!backups/.gitkeep
+!server/plugins/.gitkeep
