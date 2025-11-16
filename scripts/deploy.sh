@@ -22,6 +22,25 @@ cd ../..
 echo "📦 Installation du plugin..."
 cp plugins/ZineCraftCore/build/libs/ZineCraftCore-*.jar server/plugins/
 
+# 3.5. Copie des templates de configuration (si premier déploiement)
+echo "📝 Copie des templates de configuration..."
+if [ ! -f server/server.properties ]; then
+    cp config/server.properties.template server/server.properties
+    echo "  ✓ server.properties créé"
+fi
+if [ ! -f server/bukkit.yml ]; then
+    cp config/bukkit.yml.template server/bukkit.yml
+    echo "  ✓ bukkit.yml créé"
+fi
+if [ ! -f server/spigot.yml ]; then
+    cp config/spigot.yml.template server/spigot.yml
+    echo "  ✓ spigot.yml créé"
+fi
+if [ ! -f server/permissions.yml ]; then
+    cp config/permissions.yml server/permissions.yml
+    echo "  ✓ permissions.yml créé"
+fi
+
 # 4. Redémarrage du serveur
 echo "🔄 Redémarrage du serveur..."
 cd docker

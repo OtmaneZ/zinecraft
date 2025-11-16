@@ -1,0 +1,80 @@
+# ==========================================
+# ZineCraft - Spigot Configuration Template
+# ==========================================
+
+messages:
+  whitelist: §c§lAccès refusé ! §7Tu n'es pas sur la whitelist.
+  unknown-command: §cCommande inconnue. Tape §e/help §cpour l'aide.
+  server-full: §c§lServeur complet ! §7Réessaye plus tard.
+  outdated-client: §cClient obsolète ! Utilise la version §e{0}
+  outdated-server: §cServeur obsolète ! Version §e{0}
+  restart: §6§lServeur en redémarrage...
+
+advancements:
+  disable-saving: false
+  disabled:
+  - minecraft:story/disabled
+
+settings:
+  timeout-time: 60
+  restart-on-crash: true
+  restart-script: ./start.sh
+  save-user-cache-on-stop-only: false
+  sample-count: 12
+  bungeecord: false
+  player-shuffle: 0
+  user-cache-size: 1000
+  moved-wrongly-threshold: 0.0625
+  moved-too-quickly-multiplier: 10.0
+  netty-threads: 4
+  attribute:
+    maxHealth:
+      max: 2048.0
+    movementSpeed:
+      max: 2048.0
+    attackDamage:
+      max: 2048.0
+  log-villager-deaths: true
+  log-named-deaths: true
+  debug: false
+
+world-settings:
+  default:
+    view-distance: default
+    simulation-distance: default
+    
+    # Spawn des mobs optimisé
+    mob-spawn-range: 6        # Réduit de 8 pour perfs
+    nerf-spawner-mobs: false
+    
+    # Durée de vie des items
+    item-despawn-rate: 6000   # 5 minutes
+    arrow-despawn-rate: 1200  # 1 minute
+    trident-despawn-rate: 1200
+    
+    # Croissance des plantes (200 = 2x plus rapide)
+    growth:
+      cactus-modifier: 100
+      cane-modifier: 100
+      melon-modifier: 150      # Plus rapide pour farming
+      mushroom-modifier: 100
+      pumpkin-modifier: 150    # Plus rapide pour farming
+      sapling-modifier: 100
+      beetroot-modifier: 150
+      carrot-modifier: 150
+      potato-modifier: 150
+      wheat-modifier: 150
+      netherwart-modifier: 100
+      bamboo-modifier: 100
+      sweetberry-modifier: 150
+      kelp-modifier: 100
+    
+    # Portée d'activation des entités (performances)
+    entity-activation-range:
+      animals: 24        # Réduit de 32
+      monsters: 24       # Réduit de 32
+      raiders: 40        # Réduit de 48
+      misc: 12           # Réduit de 16
+      water: 12          # Réduit de 16
+      villagers: 24      # Réduit de 32
+      flying-monsters: 32

@@ -1,0 +1,56 @@
+# ==========================================
+# ZineCraft - Permissions Configuration
+# ==========================================
+# Permissions de base pour les joueurs
+
+# Groupe par défaut (tous les joueurs)
+default:
+  default: true
+  permissions:
+    - essentials.spawn
+    - essentials.help
+    - essentials.list
+    - essentials.msg
+    - essentials.tpa
+    - essentials.tpaccept
+    - essentials.tpdeny
+    - essentials.warp
+    - zinecraft.skills.use
+    - zinecraft.quests.view
+    - zinecraft.pets.use
+    - zinecraft.menu
+
+# Groupe VIP (grade payant)
+vip:
+  default: false
+  permissions:
+    - group.default
+    - essentials.fly
+    - essentials.kit.vip
+    - zinecraft.pets.vip
+    - zinecraft.cosmetics.particles
+
+# Groupe VIP+ (grade premium)
+vipplus:
+  default: false
+  permissions:
+    - group.vip
+    - essentials.kit.vipplus
+    - zinecraft.pets.premium
+    - zinecraft.cosmetics.all
+
+# Groupe Modérateur
+moderator:
+  default: false
+  permissions:
+    - group.vipplus
+    - essentials.kick
+    - essentials.mute
+    - essentials.warn
+    - essentials.teleport
+
+# Groupe Admin
+admin:
+  default: false
+  permissions:
+    - '*'
