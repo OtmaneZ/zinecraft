@@ -7,6 +7,16 @@ author: Otmane & Adam
 website: https://zinecraft.fr
 
 commands:
+  unstuck:
+    description: Se sortir d'un trou
+    usage: /unstuck
+    aliases: [stuck, help]
+  spawn:
+    description: Se téléporter au spawn
+    usage: /spawn
+  parkour:
+    description: Démarrer le parkour
+    usage: /parkour [stop]
   combat:
     description: Ouvrir le menu de combat
     usage: /combat

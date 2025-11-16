@@ -5,10 +5,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import fr.zinecraft.core.listeners.BlockBreakListener;
 import fr.zinecraft.core.listeners.PlayerJoinListener;
+import fr.zinecraft.core.listeners.ParkourListener;
 import fr.zinecraft.core.commands.CombatCommand;
 import fr.zinecraft.core.commands.Combat1v1Command;
 import fr.zinecraft.core.commands.Combat2v2Command;
+import fr.zinecraft.core.commands.ParkourCommand;
+import fr.zinecraft.core.commands.SpawnCommand;
+import fr.zinecraft.core.commands.UnstuckCommand;
 import fr.zinecraft.core.arena.ArenaManager;
+import fr.zinecraft.core.parkour.ParkourManager;
 
 /**
  * ZineCraft Core Plugin
@@ -23,6 +28,7 @@ public class ZineCraftCore extends JavaPlugin {
 
     // Managers
     private ArenaManager arenaManager;
+    private ParkourManager parkourManager;
 
     // Managers (à créer plus tard)
     // private DatabaseManager databaseManager;
@@ -57,6 +63,7 @@ public class ZineCraftCore extends JavaPlugin {
 
         // 3. Enregistrer les managers
         arenaManager = new ArenaManager(this);
+        parkourManager = new ParkourManager();
         logSuccess("Managers initialized!");
 
         // 4. Enregistrer les commandes
@@ -102,12 +109,22 @@ public class ZineCraftCore extends JavaPlugin {
     }
 
     /**
+     * Récupérer le ParkourManager
+     */
+    public ParkourManager getParkourManager() {
+        return parkourManager;
+    }
+
+    /**
      * Enregistrer toutes les commandes
      */
     private void registerCommands() {
         getCommand("combat").setExecutor(new CombatCommand());
         getCommand("combat1v1").setExecutor(new Combat1v1Command());
         getCommand("combat2v2").setExecutor(new Combat2v2Command());
+        getCommand("parkour").setExecutor(new ParkourCommand());
+        getCommand("spawn").setExecutor(new SpawnCommand());
+        getCommand("unstuck").setExecutor(new UnstuckCommand());
     }
 
     /**
@@ -116,6 +133,7 @@ public class ZineCraftCore extends JavaPlugin {
     private void registerListeners() {
         getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
+        getServer().getPluginManager().registerEvents(new ParkourListener(), this);
     }
 
     /**
