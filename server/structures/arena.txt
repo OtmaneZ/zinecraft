@@ -1,0 +1,28 @@
+# Arène PvP
+# Construit devant le joueur
+# Taille: 30x15x30 blocs
+
+# Sol de l'arène
+fill ~0 ~-1 ~0 ~30 ~-1 ~30 red_concrete
+
+# Murs invisibles
+fill ~0 ~ ~0 ~30 ~15 ~30 barrier hollow
+
+# Pilier rouge (team 1)
+fill ~5 ~ ~5 ~7 ~10 ~7 obsidian
+
+# Pilier bleu (team 2)
+fill ~23 ~ ~23 ~25 ~10 ~25 diamond_block
+
+# Obstacle central
+fill ~13 ~ ~13 ~17 ~5 ~17 stone_bricks
+
+# Plaforme centrale haute
+fill ~14 ~8 ~14 ~16 ~8 ~16 quartz_block
+
+# Éclairage
+fill ~0 ~15 ~0 ~30 ~15 ~30 glowstone
+
+# Entrées
+fill ~15 ~ ~0 ~15 ~3 ~0 air
+fill ~15 ~ ~30 ~15 ~3 ~30 air

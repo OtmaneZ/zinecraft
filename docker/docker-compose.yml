@@ -5,7 +5,7 @@ services:
   # PaperMC Server
   # ==========================================
   papermc:
-    image: itzg/minecraft-server:java17
+    image: itzg/minecraft-server:java21
     container_name: zinecraft-papermc
     restart: unless-stopped
     ports:
@@ -14,7 +14,7 @@ services:
     environment:
       EULA: "TRUE"
       TYPE: "PAPER"
-      VERSION: "1.20.4"
+      VERSION: "1.21"
       MEMORY: "4G"
       SERVER_NAME: "ZineCraft Server"
       MOTD: "§6§l🎮 ZineCraft §r§7- Serveur Premium"

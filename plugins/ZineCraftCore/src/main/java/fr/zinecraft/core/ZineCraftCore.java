@@ -14,6 +14,7 @@ import fr.zinecraft.core.commands.ParkourCommand;
 import fr.zinecraft.core.commands.SpawnCommand;
 import fr.zinecraft.core.commands.UnstuckCommand;
 import fr.zinecraft.core.commands.BossCommand;
+import fr.zinecraft.core.commands.BuildCommand;
 import fr.zinecraft.core.arena.ArenaManager;
 import fr.zinecraft.core.parkour.ParkourManager;
 import fr.zinecraft.core.boss.BossManager;
@@ -138,6 +139,7 @@ public class ZineCraftCore extends JavaPlugin {
         getCommand("spawn").setExecutor(new SpawnCommand());
         getCommand("unstuck").setExecutor(new UnstuckCommand());
         getCommand("boss").setExecutor(new BossCommand());
+        getCommand("build").setExecutor(new BuildCommand());
     }
 
     /**

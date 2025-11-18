@@ -42,6 +42,10 @@ commands:
   pets:
     description: Gérer ses pets
     usage: /pets
+  build:
+    description: Construire des structures
+    usage: /build <structure>
+    aliases: [structure]
 
 permissions:
   zinecraft.*:

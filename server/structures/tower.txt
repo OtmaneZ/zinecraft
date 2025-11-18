@@ -1,0 +1,37 @@
+# Tour d'observation
+# Construit devant le joueur
+# Taille: 5x30x5 blocs
+
+# Base de la tour
+fill ~2 ~ ~2 ~6 ~25 ~6 stone_bricks hollow
+
+# Plateforme du haut
+fill ~1 ~25 ~1 ~7 ~25 ~7 stone_bricks
+
+# Toit pyramide
+fill ~2 ~26 ~2 ~6 ~26 ~6 stone_brick_stairs
+fill ~3 ~27 ~3 ~5 ~27 ~5 stone_brick_stairs
+setblock ~4 ~28 ~4 stone_brick_stairs
+
+# Escaliers internes
+setblock ~3 ~0 ~3 oak_stairs
+setblock ~3 ~1 ~4 oak_stairs
+setblock ~4 ~2 ~4 oak_stairs
+setblock ~4 ~3 ~3 oak_stairs
+# ... continue en spirale
+
+# Fenêtres
+setblock ~2 ~5 ~4 glass_pane
+setblock ~6 ~5 ~4 glass_pane
+setblock ~2 ~10 ~4 glass_pane
+setblock ~6 ~10 ~4 glass_pane
+setblock ~2 ~15 ~4 glass_pane
+setblock ~6 ~15 ~4 glass_pane
+setblock ~2 ~20 ~4 glass_pane
+setblock ~6 ~20 ~4 glass_pane
+
+# Torches
+setblock ~3 ~5 ~5 torch
+setblock ~3 ~10 ~5 torch
+setblock ~3 ~15 ~5 torch
+setblock ~3 ~20 ~5 torch
