@@ -1,0 +1,181 @@
+# Château médiéval impressionnant par Adam
+# Construit devant le joueur
+# Taille: 30x25x30 blocs
+# Style: Médiéval avec 4 tours d'angle et mur d'enceinte
+
+# === FONDATIONS ===
+# Base du château
+fill ~0 ~-1 ~0 ~29 ~-1 ~29 stone
+
+# === MUR D'ENCEINTE PRINCIPAL ===
+# Murs extérieurs en pierre taillée (hollow = creux)
+fill ~0 ~0 ~0 ~29 ~12 ~29 stone_bricks hollow
+
+# === TOURS D'ANGLE ===
+# Tour avant-gauche
+fill ~0 ~0 ~0 ~5 ~20 ~5 stone_bricks hollow
+setblock ~2 ~21 ~2 glowstone
+
+# Tour avant-droite
+fill ~24 ~0 ~0 ~29 ~20 ~5 stone_bricks hollow
+setblock ~27 ~21 ~2 glowstone
+
+# Tour arrière-gauche
+fill ~0 ~0 ~24 ~5 ~20 ~29 stone_bricks hollow
+setblock ~2 ~21 ~27 glowstone
+
+# Tour arrière-droite
+fill ~24 ~0 ~24 ~29 ~20 ~29 stone_bricks hollow
+setblock ~27 ~21 ~27 glowstone
+
+# === CRÉNEAUX SUR LES TOURS ===
+# Tour avant-gauche - créneaux
+fill ~0 ~20 ~0 ~5 ~21 ~0 stone_brick_stairs
+fill ~0 ~20 ~5 ~5 ~21 ~5 stone_brick_stairs
+fill ~0 ~20 ~0 ~0 ~21 ~5 stone_brick_stairs
+fill ~5 ~20 ~0 ~5 ~21 ~5 stone_brick_stairs
+
+# Tour avant-droite - créneaux
+fill ~24 ~20 ~0 ~29 ~21 ~0 stone_brick_stairs
+fill ~24 ~20 ~5 ~29 ~21 ~5 stone_brick_stairs
+fill ~24 ~20 ~0 ~24 ~21 ~5 stone_brick_stairs
+fill ~29 ~20 ~0 ~29 ~21 ~5 stone_brick_stairs
+
+# === ENTRÉE PRINCIPALE ===
+# Grande porte (4 blocs de large, 5 de haut)
+fill ~13 ~0 ~0 ~16 ~5 ~0 air
+
+# Cadre de porte décoratif
+fill ~12 ~0 ~0 ~12 ~6 ~0 stone_brick_stairs
+fill ~17 ~0 ~0 ~17 ~6 ~0 stone_brick_stairs
+fill ~12 ~6 ~0 ~17 ~6 ~0 stone_brick_stairs
+
+# === DONJON CENTRAL ===
+# Structure principale intérieure
+fill ~8 ~0 ~8 ~21 ~16 ~21 stone_bricks hollow
+
+# Toit du donjon en escaliers (effet pyramide)
+fill ~8 ~16 ~8 ~21 ~16 ~21 stone_brick_stairs
+fill ~9 ~17 ~9 ~20 ~17 ~20 stone_brick_stairs
+fill ~10 ~18 ~10 ~19 ~18 ~19 stone_brick_stairs
+fill ~11 ~19 ~11 ~18 ~19 ~18 stone_brick_stairs
+
+# Sommet doré du donjon
+setblock ~14 ~20 ~14 gold_block
+setblock ~15 ~20 ~14 gold_block
+setblock ~14 ~20 ~15 gold_block
+setblock ~15 ~20 ~15 gold_block
+
+# === FENÊTRES ===
+# Mur avant - fenêtres
+fill ~7 ~8 ~0 ~7 ~10 ~0 glass_pane
+fill ~10 ~8 ~0 ~10 ~10 ~0 glass_pane
+fill ~19 ~8 ~0 ~19 ~10 ~0 glass_pane
+fill ~22 ~8 ~0 ~22 ~10 ~0 glass_pane
+
+# Mur arrière - fenêtres
+fill ~7 ~8 ~29 ~7 ~10 ~29 glass_pane
+fill ~10 ~8 ~29 ~10 ~10 ~29 glass_pane
+fill ~19 ~8 ~29 ~19 ~10 ~29 glass_pane
+fill ~22 ~8 ~29 ~22 ~10 ~29 glass_pane
+
+# Mur gauche - fenêtres
+fill ~0 ~8 ~10 ~0 ~10 ~10 glass_pane
+fill ~0 ~8 ~19 ~0 ~10 ~19 glass_pane
+
+# Mur droit - fenêtres
+fill ~29 ~8 ~10 ~29 ~10 ~10 glass_pane
+fill ~29 ~8 ~19 ~29 ~10 ~19 glass_pane
+
+# Fenêtres du donjon
+fill ~8 ~10 ~14 ~8 ~12 ~15 glass_pane
+fill ~21 ~10 ~14 ~21 ~12 ~15 glass_pane
+fill ~14 ~10 ~8 ~15 ~12 ~8 glass_pane
+fill ~14 ~10 ~21 ~15 ~12 ~21 glass_pane
+
+# === CRÉNEAUX SUR MURS ===
+# Mur avant
+fill ~6 ~12 ~0 ~23 ~13 ~0 stone_brick_wall
+
+# Mur arrière
+fill ~6 ~12 ~29 ~23 ~13 ~29 stone_brick_wall
+
+# Mur gauche
+fill ~0 ~12 ~6 ~0 ~13 ~23 stone_brick_wall
+
+# Mur droit
+fill ~29 ~12 ~6 ~29 ~13 ~23 stone_brick_wall
+
+# === ÉCLAIRAGE ===
+# Torches entrée principale
+setblock ~12 ~3 ~1 torch
+setblock ~17 ~3 ~1 torch
+setblock ~12 ~5 ~1 torch
+setblock ~17 ~5 ~1 torch
+
+# Torches intérieures des tours
+setblock ~2 ~5 ~2 torch
+setblock ~2 ~10 ~2 torch
+setblock ~2 ~15 ~2 torch
+
+setblock ~27 ~5 ~2 torch
+setblock ~27 ~10 ~2 torch
+setblock ~27 ~15 ~2 torch
+
+setblock ~2 ~5 ~27 torch
+setblock ~2 ~10 ~27 torch
+setblock ~2 ~15 ~27 torch
+
+setblock ~27 ~5 ~27 torch
+setblock ~27 ~10 ~27 torch
+setblock ~27 ~15 ~27 torch
+
+# Lampes décoratives sur les murs
+setblock ~7 ~7 ~1 lantern
+setblock ~14 ~7 ~1 lantern
+setblock ~22 ~7 ~1 lantern
+
+setblock ~7 ~7 ~28 lantern
+setblock ~14 ~7 ~28 lantern
+setblock ~22 ~7 ~28 lantern
+
+# === COUR INTÉRIEURE ===
+# Sol de la cour en dalles de pierre
+fill ~6 ~0 ~6 ~23 ~0 ~23 stone_bricks
+
+# Jardin central
+fill ~12 ~0 ~12 ~17 ~0 ~17 grass_block
+
+# Fontaine centrale
+fill ~14 ~0 ~14 ~15 ~0 ~15 water
+setblock ~14 ~1 ~14 stone_brick_wall
+setblock ~15 ~1 ~14 stone_brick_wall
+setblock ~14 ~1 ~15 stone_brick_wall
+setblock ~15 ~1 ~15 stone_brick_wall
+
+# === DÉCORATIONS FINALES ===
+# Drapeaux sur les tours (laine rouge)
+setblock ~2 ~22 ~2 red_wool
+setblock ~2 ~23 ~2 red_wool
+setblock ~2 ~24 ~2 red_wool
+
+setblock ~27 ~22 ~2 red_wool
+setblock ~27 ~23 ~2 red_wool
+setblock ~27 ~24 ~2 red_wool
+
+setblock ~2 ~22 ~27 red_wool
+setblock ~2 ~23 ~27 red_wool
+setblock ~2 ~24 ~27 red_wool
+
+setblock ~27 ~22 ~27 red_wool
+setblock ~27 ~23 ~27 red_wool
+setblock ~27 ~24 ~27 red_wool
+
+# Bancs dans la cour
+fill ~8 ~1 ~8 ~10 ~1 ~8 oak_stairs
+fill ~19 ~1 ~8 ~21 ~1 ~8 oak_stairs
+fill ~8 ~1 ~21 ~10 ~1 ~21 oak_stairs
+fill ~19 ~1 ~21 ~21 ~1 ~21 oak_stairs
+
+# === MESSAGE DE SUCCÈS ===
+# (Le joueur verra son château construit)
