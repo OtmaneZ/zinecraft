@@ -7,6 +7,7 @@ import fr.zinecraft.core.listeners.BlockBreakListener;
 import fr.zinecraft.core.listeners.PlayerJoinListener;
 import fr.zinecraft.core.listeners.ParkourListener;
 import fr.zinecraft.core.listeners.BossListener;
+import fr.zinecraft.core.listeners.WeaponListener;
 import fr.zinecraft.core.commands.CombatCommand;
 import fr.zinecraft.core.commands.Combat1v1Command;
 import fr.zinecraft.core.commands.Combat2v2Command;
@@ -15,9 +16,16 @@ import fr.zinecraft.core.commands.SpawnCommand;
 import fr.zinecraft.core.commands.UnstuckCommand;
 import fr.zinecraft.core.commands.BossCommand;
 import fr.zinecraft.core.commands.BuildCommand;
+import fr.zinecraft.core.commands.PetCommand;
+import fr.zinecraft.core.commands.WeaponCommand;
+import fr.zinecraft.core.commands.PowerCommand;
+import fr.zinecraft.core.commands.ScaryZoneCommand;
 import fr.zinecraft.core.arena.ArenaManager;
 import fr.zinecraft.core.parkour.ParkourManager;
 import fr.zinecraft.core.boss.BossManager;
+import fr.zinecraft.core.pets.PetManager;
+import fr.zinecraft.core.weapons.WeaponManager;
+import fr.zinecraft.core.powers.PowerManager;
 
 /**
  * ZineCraft Core Plugin
@@ -34,13 +42,15 @@ public class ZineCraftCore extends JavaPlugin {
     private ArenaManager arenaManager;
     private ParkourManager parkourManager;
     private BossManager bossManager;
+    private PetManager petManager;
+    private WeaponManager weaponManager;
+    private PowerManager powerManager;
 
     // Managers (à créer plus tard)
     // private DatabaseManager databaseManager;
     // private PlayerManager playerManager;
     // private SkillManager skillManager;
     // private QuestManager questManager;
-    // private PetManager petManager;
 
     @Override
     public void onEnable() {
@@ -70,6 +80,9 @@ public class ZineCraftCore extends JavaPlugin {
         arenaManager = new ArenaManager(this);
         parkourManager = new ParkourManager();
         bossManager = new BossManager(this);
+        petManager = new PetManager(this);
+        weaponManager = new WeaponManager(this);
+        powerManager = new PowerManager(this);
         logSuccess("Managers initialized!");
 
         // 4. Enregistrer les commandes
@@ -129,6 +142,27 @@ public class ZineCraftCore extends JavaPlugin {
     }
 
     /**
+     * Récupérer le PetManager
+     */
+    public PetManager getPetManager() {
+        return petManager;
+    }
+
+    /**
+     * Récupérer le WeaponManager
+     */
+    public WeaponManager getWeaponManager() {
+        return weaponManager;
+    }
+
+    /**
+     * Récupérer le PowerManager
+     */
+    public PowerManager getPowerManager() {
+        return powerManager;
+    }
+
+    /**
      * Enregistrer toutes les commandes
      */
     private void registerCommands() {
@@ -140,6 +174,10 @@ public class ZineCraftCore extends JavaPlugin {
         getCommand("unstuck").setExecutor(new UnstuckCommand());
         getCommand("boss").setExecutor(new BossCommand());
         getCommand("build").setExecutor(new BuildCommand());
+        getCommand("pet").setExecutor(new PetCommand());
+        getCommand("weapon").setExecutor(new WeaponCommand());
+        getCommand("power").setExecutor(new PowerCommand());
+        getCommand("scary").setExecutor(new ScaryZoneCommand());
     }
 
     /**
@@ -150,6 +188,7 @@ public class ZineCraftCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerJoinListener(), this);
         getServer().getPluginManager().registerEvents(new ParkourListener(), this);
         getServer().getPluginManager().registerEvents(new BossListener(), this);
+        getServer().getPluginManager().registerEvents(new WeaponListener(), this);
     }
 
     /**

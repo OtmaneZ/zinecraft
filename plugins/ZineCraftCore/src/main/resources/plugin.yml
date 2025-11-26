@@ -42,10 +42,26 @@ commands:
   pets:
     description: Gérer ses pets
     usage: /pets
+  pet:
+    description: Gérer ses familiers
+    usage: /pet [list|spawn|info|evolve|remove]
+    aliases: [familier, companion]
+  weapon:
+    description: Obtenir des armes légendaires
+    usage: /weapon [list|give]
+    aliases: [arme, sword]
+  power:
+    description: Utiliser des super-pouvoirs
+    usage: /power [list|<nom>]
+    aliases: [pouvoir, superpowers]
   build:
     description: Construire des structures
     usage: /build <structure>
     aliases: [structure]
+  scary:
+    description: Zone effrayante avec orage et ambiance terrifiante
+    usage: /scary [on|off]
+    aliases: [effrayant, spooky, horror]
 
 permissions:
   zinecraft.*:
