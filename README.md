@@ -10,15 +10,15 @@
 ## 📊 État Actuel du Projet
 
 **Dernière mise à jour** : 26 novembre 2025
-**Phase actuelle** : 🎨 Redesign & Assets (Pivot solo)
+**Phase actuelle** : 🎮 Développement Features Custom
 
 ```
-███████░░░░░░░░░░░░░░ 35% Complete (Infrastructure OK)
+██████████░░░░░░░░░░ 50% Complete (Core Features OK)
 ```
 
 **🎮 Serveur** : `91.99.237.55:25565` (Minecraft Java 1.21)
-**👤 Développeur** : Otmane (projet solo, Adam a abandonné)
-**💰 Budget optimisé** : 50-60€ en assets critiques (map + logo)
+**👤 Développeur** : Otmane + Copilot
+**💰 Budget utilisé** : 0€ (tout codé maison)
 
 ## 🎯 Vision du Projet
 
@@ -144,11 +144,15 @@ Approche optimisée : **coder soi-même** + acheter uniquement les assets critiq
 ### Plugins Custom (Codés maison)
 
 - **ZineCraftCore** - Plugin principal custom
+  - **ArenaManager** - Combat PvP 1v1/2v2
+  - **BossManager** - 6 boss customs (Titan, Dragon, Démon, Golem, Phénix, Kraken)
+  - **ParkourManager** - Parkours avec récompenses
+  - **PetManager** - 8 types de familiers évolutifs (Wolf, Dragon, Eagle, Golem, Phoenix, Unicorn, Spider, Turtle)
+  - **WeaponManager** - 10 armes légendaires avec pouvoirs (Excalibur, Fire Blade, Thor Hammer, etc.)
+  - **PowerManager** - 12 super-pouvoirs (Speed, Flight, Tornado, Lightning, Shield, etc.)
+  - **ScaryZoneCommand** - Zones effrayantes avec orage et ambiance terrifiante
+  - **BuildCommand** - Construction de structures (château, tour, maison, pyramide)
   - Système d'économie & argent virtuel
-  - ArenaManager - Combat PvP 1v1/2v2
-  - BossManager - Boss customs avec drops
-  - ParkourManager - Parkours avec récompenses
-  - Système de quêtes personnalisé
   - Grades VIP avec permissions custom
 - **Plugins communautaires** (support)
   - Vault - API économie
@@ -165,16 +169,35 @@ Approche optimisée : **coder soi-même** + acheter uniquement les assets critiq
 ## 📁 Structure du Projet
 
 ```
-Zinecraft/
-├── server/              # Serveur PaperMC
-│   ├── plugins/         # Plugins compilés
-│   └── config/          # Configurations serveur
-├── plugins/             # Code source des plugins
-│   └── ZineCraftCore/   # Plugin principal
-├── web/                 # Landing page
-├── docker/              # Configuration Docker
-├── docs/                # Documentation
-└── scripts/             # Scripts utilitaires
+zinecraft/
+├── server/                  # Serveur PaperMC
+│   ├── plugins/            # Plugins compilés
+│   ├── world/              # Monde principal
+│   └── config/             # Configurations serveur
+├── plugins/                # Code source des plugins
+│   └── ZineCraftCore/      # Plugin principal (Java)
+│       ├── src/main/java/fr/zinecraft/core/
+│       │   ├── commands/   # Commandes (/boss, /pet, /weapon, /power, /scary)
+│       │   ├── listeners/  # Event listeners
+│       │   ├── boss/       # Système de boss
+│       │   ├── pets/       # Système de familiers
+│       │   ├── weapons/    # Système d'armes
+│       │   ├── powers/     # Système de pouvoirs
+│       │   ├── arena/      # Système d'arènes PvP
+│       │   └── parkour/    # Système de parkour
+│       └── build.gradle    # Configuration Gradle
+├── management-scripts/     # Scripts de gestion RCON
+│   ├── boss-manager.sh     # Gestion des boss
+│   ├── clean-map.sh        # Nettoyage de la map
+│   ├── create-platform.sh  # Création de plateformes
+│   └── sky-message-manager.sh  # Messages dans le ciel
+├── docker/                 # Configuration Docker
+│   └── docker-compose.yml  # Stack complète
+├── docs/                   # Documentation
+│   ├── ARCHITECTURE.md
+│   └── GUIDE_FEATURES.md   # Guide complet des features
+├── scripts/                # Scripts de déploiement
+└── config/                 # Templates de config
 ```
 
 ## 🛠️ Installation & Setup
@@ -262,13 +285,14 @@ mc "commande"
 
 ## 👥 Équipe & Contexte
 
-**Développeur solo** : Otmane
+**Développeur** : Otmane + GitHub Copilot
 
-- Infrastructure & DevOps
-- Configuration plugins
-- Marketing & monétisation
+- Infrastructure & DevOps ✅
+- Développement Java/Spigot ✅
+- Gameplay features custom ✅
+- Configuration & optimisation ✅
 
-**Note** : Projet initialement en duo avec Adam (fils, développement plugins), qui a abandonné le 18 novembre 2025. Pivot vers approche solo avec plugins existants au lieu de développement Java from scratch.
+**Note** : Développement 100% maison avec approche "coder plutôt qu'acheter" - Économie de 150€ en plugins tout en ayant un gameplay unique et personnalisé.
 
 ## 📅 Roadmap Révisée (Solo)
 
@@ -327,23 +351,32 @@ mc "commande"
 |-----------|--------|-------------|
 | 🏗️ Infrastructure | ✅ Complet | 100% ████████████ |
 | 🎮 Serveur opérationnel | ✅ OK | 100% ████████████ |
-| � Budget assets | � En cours | 0% ░░░░░░░░░░░░ |
-| 🔌 Plugins installés | ⏳ À faire | 0% ░░░░░░░░░░░░ |
-| 🎨 Design & Map | ⏳ Commandé | 0% ░░░░░░░░░░░░ |
-| 🎮 Gameplay configuré | ⏳ À faire | 0% ░░░░░░░░░░░░ |
+| 🔌 Plugin ZineCraftCore | ✅ Développé | 100% ████████████ |
+| 👾 Boss System | ✅ Complet | 100% ████████████ |
+| 🐾 Pet System | ✅ Complet | 100% ████████████ |
+| ⚔️ Weapon System | ✅ Complet | 100% ████████████ |
+| ⚡ Power System | ✅ Complet | 100% ████████████ |
+| 🏗️ Build System | ✅ Complet | 100% ████████████ |
+| 👻 Scary Zone | ✅ Complet | 100% ████████████ |
+| 🎨 Design & Map | ⏳ À faire | 0% ░░░░░░░░░░░░ |
+| 🪙 Économie & Jobs | ⏳ À faire | 0% ░░░░░░░░░░░░ |
+| 📜 Quêtes | ⏳ À faire | 0% ░░░░░░░░░░░░ |
 | 🪙 Monétisation (Tebex) | ⏳ À faire | 0% ░░░░░░░░░░░░ |
 | 📱 Marketing | ⏳ À faire | 0% ░░░░░░░░░░░░ |
-| **GLOBAL** | 🚧 Pivot solo | **25%** ███░░░░░░░░░ |
+| **GLOBAL** | 🚀 Features custom | **50%** ██████░░░░░░ |
 
 ## ✅ Changelog Important
 
-**26 novembre 2025** - Pivot stratégique
+**26 novembre 2025** - Features Custom Complètes
 
-- 🔄 Passage en mode solo (Adam a quitté le projet)
-- ❌ Abandon développement plugin Java from scratch
-- ✅ Nouvelle approche : plugins existants + assets premium
-- 💰 Budget de 150€ alloué pour assets professionnels
-- 🎯 Focus : Survival+ monétisable plutôt que serveur custom complexe
+- ✅ **BossManager** - 6 boss customs avec animations et drops
+- ✅ **PetManager** - 8 types de familiers avec système d'évolution
+- ✅ **WeaponManager** - 10 armes légendaires avec pouvoirs spéciaux
+- ✅ **PowerManager** - 12 super-pouvoirs avec cooldowns et animations
+- ✅ **BuildCommand** - Construction automatique de structures
+- ✅ **ScaryZoneCommand** - Zones effrayantes avec effets visuels/sonores
+- 🎯 Serveur 100% custom sans dépenser 1€ en plugins
+- 📚 Documentation complète (GUIDE_FEATURES.md)
 
 **16-18 novembre 2025** - Infrastructure
 
