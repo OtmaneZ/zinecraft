@@ -8,6 +8,8 @@ import fr.zinecraft.core.listeners.PlayerJoinListener;
 import fr.zinecraft.core.listeners.ParkourListener;
 import fr.zinecraft.core.listeners.BossListener;
 import fr.zinecraft.core.listeners.WeaponListener;
+import fr.zinecraft.core.listeners.RPGPlayerListener;
+import fr.zinecraft.core.listeners.NPCListener;
 import fr.zinecraft.core.commands.CombatCommand;
 import fr.zinecraft.core.commands.Combat1v1Command;
 import fr.zinecraft.core.commands.Combat2v2Command;
@@ -20,12 +22,20 @@ import fr.zinecraft.core.commands.PetCommand;
 import fr.zinecraft.core.commands.WeaponCommand;
 import fr.zinecraft.core.commands.PowerCommand;
 import fr.zinecraft.core.commands.ScaryZoneCommand;
+import fr.zinecraft.core.commands.ClassCommand;
+import fr.zinecraft.core.commands.EventCommand;
+import fr.zinecraft.core.commands.EffectCommand;
 import fr.zinecraft.core.arena.ArenaManager;
 import fr.zinecraft.core.parkour.ParkourManager;
 import fr.zinecraft.core.boss.BossManager;
 import fr.zinecraft.core.pets.PetManager;
 import fr.zinecraft.core.weapons.WeaponManager;
 import fr.zinecraft.core.powers.PowerManager;
+import fr.zinecraft.core.rpg.PlayerManager;
+import fr.zinecraft.core.rpg.ClassManager;
+import fr.zinecraft.core.rpg.NPCManager;
+import fr.zinecraft.core.events.EventManager;
+import fr.zinecraft.core.visuals.VisualEffectManager;
 
 /**
  * ZineCraft Core Plugin
@@ -45,12 +55,17 @@ public class ZineCraftCore extends JavaPlugin {
     private PetManager petManager;
     private WeaponManager weaponManager;
     private PowerManager powerManager;
+    private PlayerManager playerManager;
+    private ClassManager classManager;
+    private NPCManager npcManager;
+    private NPCListener npcListener;
+    private EventManager eventManager;
+    private VisualEffectManager visualEffectManager;
 
     // Managers (à créer plus tard)
-    // private DatabaseManager databaseManager;
-    // private PlayerManager playerManager;
-    // private SkillManager skillManager;
+    // private LevelManager levelManager;
     // private QuestManager questManager;
+    // private EconomyManager economyManager;
 
     @Override
     public void onEnable() {
@@ -72,8 +87,8 @@ public class ZineCraftCore extends JavaPlugin {
         saveDefaultConfig();
         logSuccess("Configuration loaded!");
 
-        // 2. Initialiser la base de données
-        // TODO: Créer DatabaseManager
+        // 2. Initialiser la base de données MySQL
+        playerManager = new PlayerManager(this);
         logSuccess("Database connected!");
 
         // 3. Enregistrer les managers
@@ -83,6 +98,10 @@ public class ZineCraftCore extends JavaPlugin {
         petManager = new PetManager(this);
         weaponManager = new WeaponManager(this);
         powerManager = new PowerManager(this);
+        classManager = new ClassManager(this);
+        npcManager = new NPCManager(this, classManager);
+        eventManager = new EventManager(this);
+        visualEffectManager = new VisualEffectManager(this);
         logSuccess("Managers initialized!");
 
         // 4. Enregistrer les commandes
@@ -103,11 +122,16 @@ public class ZineCraftCore extends JavaPlugin {
         logInfo("");
         logInfo("Disabling ZineCraft Core...");
 
-        // Sauvegarder les données
-        // TODO: Sauvegarder toutes les données en mémoire
+        // Arrêter les événements
+        if (eventManager != null) {
+            eventManager.shutdown();
+        }
 
-        // Fermer la connexion BDD
-        // TODO: Fermer DatabaseManager
+        // Sauvegarder les données RPG
+        if (playerManager != null) {
+            playerManager.saveAllPlayers();
+            playerManager.closeConnection();
+        }
 
         logSuccess("ZineCraft Core disabled successfully!");
         logInfo("");
@@ -163,6 +187,41 @@ public class ZineCraftCore extends JavaPlugin {
     }
 
     /**
+     * Récupérer le PlayerManager
+     */
+    public PlayerManager getPlayerManager() {
+        return playerManager;
+    }
+
+    /**
+     * Récupérer le ClassManager
+     */
+    public ClassManager getClassManager() {
+        return classManager;
+    }
+
+    /**
+     * Récupérer le NPCManager
+     */
+    public NPCManager getNPCManager() {
+        return npcManager;
+    }
+
+    /**
+     * Récupérer l'EventManager
+     */
+    public EventManager getEventManager() {
+        return eventManager;
+    }
+
+    /**
+     * Récupérer le VisualEffectManager
+     */
+    public VisualEffectManager getVisualEffectManager() {
+        return visualEffectManager;
+    }
+
+    /**
      * Enregistrer toutes les commandes
      */
     private void registerCommands() {
@@ -178,6 +237,9 @@ public class ZineCraftCore extends JavaPlugin {
         getCommand("weapon").setExecutor(new WeaponCommand());
         getCommand("power").setExecutor(new PowerCommand());
         getCommand("scary").setExecutor(new ScaryZoneCommand());
+        getCommand("class").setExecutor(new ClassCommand(playerManager, classManager, npcManager));
+        getCommand("event").setExecutor(new EventCommand());
+        getCommand("effect").setExecutor(new EffectCommand());
     }
 
     /**
@@ -189,6 +251,10 @@ public class ZineCraftCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ParkourListener(), this);
         getServer().getPluginManager().registerEvents(new BossListener(), this);
         getServer().getPluginManager().registerEvents(new WeaponListener(), this);
+        getServer().getPluginManager().registerEvents(new RPGPlayerListener(), this);
+        npcListener = new NPCListener();
+        npcListener.setNPCManager(npcManager);
+        getServer().getPluginManager().registerEvents(npcListener, this);
     }
 
     /**

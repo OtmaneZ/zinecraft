@@ -62,6 +62,18 @@ commands:
     description: Zone effrayante avec orage et ambiance terrifiante
     usage: /scary [on|off]
     aliases: [effrayant, spooky, horror]
+  class:
+    description: Choisir et gérer sa classe RPG
+    usage: /class [list|info|choose|skills|spawnnpc]
+    aliases: [classe, rpgclass]
+  event:
+    description: Gérer les événements dynamiques
+    usage: /event [start|stop|info|list]
+    aliases: [evenement, events]
+  effect:
+    description: Gérer les effets visuels
+    usage: /effect [set|remove|list]
+    aliases: [aura, visual, fx]
 
 permissions:
   zinecraft.*:
