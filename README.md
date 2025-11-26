@@ -1,42 +1,106 @@
 # 🎮 ZineCraft Server
 
-> Serveur Minecraft professionnel créé par Otmane & Adam
+> Serveur Minecraft Survival+ monétisable - Par Otmane
 
 [![Setup](https://img.shields.io/badge/Setup-✅_Complete-brightgreen)]()
-[![Build](https://img.shields.io/badge/Build-✅_Success-brightgreen)]()
-[![Progression](https://img.shields.io/badge/Progression-20%25-yellow)]()
-[![Jour](https://img.shields.io/badge/Jour-1/30-blue)]()
+[![Type](https://img.shields.io/badge/Type-Survival+-blue)]()
+[![Budget](https://img.shields.io/badge/Budget-150€-yellow)]()
+[![Status](https://img.shields.io/badge/Status-En_développement-orange)]()
 
 ## 📊 État Actuel du Projet
 
-**Dernière mise à jour** : 16 novembre 2025
-**Phase actuelle** : 🔧 Setup & Infrastructure (Semaine 1) - ✅ **SERVEUR OPÉRATIONNEL**
+**Dernière mise à jour** : 26 novembre 2025
+**Phase actuelle** : 🎨 Redesign & Assets (Pivot solo)
 
 ```
-███████░░░░░░░░░░░░░░ 35% Complete (Jour 1/30)
+███████░░░░░░░░░░░░░░ 35% Complete (Infrastructure OK)
 ```
 
-**🎮 Serveur en ligne** : `91.99.237.55:25565` (Minecraft Java 1.21)
-**👥 Joueurs actifs** : Otmane06000, AdamLeDams
+**🎮 Serveur** : `91.99.237.55:25565` (Minecraft Java 1.21)
+**� Développeur** : Otmane (projet solo, Adam a abandonné)
+**💰 Budget investi** : 150€ en assets premium
 
-## 🎯 Vision
+## 🎯 Vision du Projet
 
-Créer **en 30 jours** un serveur Minecraft **beau, monétisable, stable et évolutif** avec :
+Créer un serveur Minecraft **Survival+ monétisable** avec :
 
-- ✨ Une expérience visuelle premium
-- 🎮 Un gameplay simple mais addictif
-- 🔧 Un pipeline DevOps propre
-- 📈 Une base ready pour scaler
+- ✨ Expérience visuelle premium (assets achetés)
+- 🎮 Gameplay survie amélioré (économie, jobs, quêtes)
+- 💰 Monétisation intelligente (grades VIP, cosmetics)
+- 📈 Infrastructure scalable et stable
+
+**Type de serveur** : Survie Vanilla+ avec économie et système de grades
+**Objectif** : Lancement en **4-6 semaines** avec première rentabilité
+
+## 💰 Budget & Investissements (150€)
+
+Pour accélérer le développement et garantir une qualité pro, investissement de **150€** en assets premium :
+
+### � Assets visuels (105€)
+
+1. **Map spawn premium** (40€) - Fiverr
+   - Spawn central professionnel
+   - Première impression critique pour retenir les joueurs
+
+2. **Logo + bannière pack** (25€) - Fiverr
+   - Logo serveur HD
+   - Bannières Discord/Site web
+   - Identité visuelle cohérente
+
+3. **Trailer vidéo 30 sec** (40€) - Fiverr
+   - Vidéo marketing professionnelle
+   - Pour TikTok/YouTube/Discord
+   - Attire les joueurs
+
+### �️ Outils & Plugins (45€)
+
+4. **Template site Tebex** (30€) - ThemeForest
+   - Site web avec boutique intégrée
+   - Monétisation immédiate
+   - Design moderne responsive
+
+5. **Pack plugins "Survival+"** (15€) - Polymart
+   - Économie + Jobs + Quêtes préconfigurés
+   - Gain de temps : 2-3 semaines de configuration
+   - Système complet clé en main
+
+### � ROI estimé
+
+- **Investissement** : 150€
+- **Gain de temps** : 3-4 semaines de développement
+- **Qualité visuelle** : x10 vs fait maison
+- **Rentabilité** : 10-15 ventes VIP à 10-15€ = breakeven
+- **Timeline** : Rentable en 1-2 mois avec bon marketing
 
 ## 🚀 Stack Technique
 
-- **Backend**: PaperMC 1.21 (Java 21)
-- **Plugins**: Java + Gradle + Spigot/Paper API
-- **Database**: MySQL 8.0
-- **Infrastructure**: Docker Compose
-- **Management**: Portainer, phpMyAdmin, RCON
-- **CI/CD**: GitHub Actions (à venir)
-- **Monétisation**: Tebex (à venir)
+### Backend & Serveur
+
+- **PaperMC 1.21** (Java 21) - Performance optimale
+- **MySQL 8.0** - Base de données (économie, joueurs, stats)
+- **RCON** - Gestion à distance
+
+### Infrastructure
+
+- **Hetzner Cloud** - Serveur dédié Ubuntu (4GB RAM)
+- **Docker Compose** - Déploiement simplifié
+- **Git/GitHub** - Versioning
+
+### Plugins (Gratuits + Premium)
+
+- **EssentialsX** - Commandes de base + économie
+- **Vault** - API économie
+- **LuckPerms** - Système de grades VIP
+- **WorldEdit/WorldGuard** - Protection & édition
+- **Pack Survival+ Premium** (15€) - Jobs, quêtes, économie avancée
+- **BuycraftX/Tebex** - Boutique en ligne (monétisation)
+
+### Assets Premium
+
+- Map spawn custom (Fiverr)
+- Resource pack moderne
+- Logo & branding
+- Site web avec boutique
 
 ## 📁 Structure du Projet
 
@@ -136,102 +200,64 @@ mc "commande"
   - Météo désactivée
   - Command blocks activés
 
-## 👥 Collaboration
+## 👥 Équipe & Contexte
 
-Ce projet est développé en équipe par :
+**Développeur solo** : Otmane
 
-- **Otmane** - Infrastructure, DevOps, Architecture
-- **Adam** - Développement plugins, Gameplay
+- Infrastructure & DevOps
+- Configuration plugins
+- Marketing & monétisation
 
-Voir [CONTRIBUTING.md](./CONTRIBUTING.md) pour les règles de contribution.
+**Note** : Projet initialement en duo avec Adam (fils, développement plugins), qui a abandonné le 18 novembre 2025. Pivot vers approche solo avec plugins existants au lieu de développement Java from scratch.
 
-## 📅 Roadmap Détaillée
+## 📅 Roadmap Révisée (Solo)
 
-### 🔧 Semaine 1 - Base technique + beauté (Jours 1-7)
+### � Phase 1 - Achat Assets (Semaine 1) - EN COURS
 
-**Progression** : `███░░░░░░░ 30%`
+**Budget** : 150€
 
-#### ✅ Infrastructure & Setup (FAIT)
+- [ ] 🛒 Commander map spawn premium sur Fiverr (40€)
+- [ ] 🛒 Commander logo + bannières sur Fiverr (25€)
+- [ ] 🛒 Commander trailer vidéo sur Fiverr (40€)
+- [ ] 🛒 Acheter template site Tebex sur ThemeForest (30€)
+- [ ] 🛒 Acheter pack plugins Survival+ sur Polymart (15€)
 
-- [x] ✅ Initialiser le repository Git
-- [x] ✅ Créer la structure de dossiers
-- [x] ✅ Setup Docker Compose (PaperMC + MySQL + Portainer)
-- [x] ✅ Configuration PaperMC 1.21 avec Java 21
-- [x] ✅ Firewall Hetzner (port 25565 ouvert)
-- [x] ✅ RCON activé pour gestion à distance
-- [x] ✅ Serveur en ligne et accessible
-- [x] ✅ Multijoueur fonctionnel (2 joueurs testés)
-- [x] ✅ Game rules configurés (eternal day, keepInventory)
-- [x] ✅ Command blocks activés
-- [x] ✅ Scripts utilitaires (rcon.sh, apply-config.sh)
-- [x] ✅ Git workflow propre (world files ignorés)
-- [x] ✅ Documentation (README, CONTRIBUTING, ARCHITECTURE)
+### 🔧 Phase 2 - Setup & Configuration (Semaine 2-3)
 
-#### 🚧 En cours
+**Objectif** : Serveur jouable avec économie
 
-- [ ] 🔄 Installer Gradle 9.2.0 + Java 17 pour développement plugins
-- [ ] 🔄 Créer projet plugin Core (build successful)
-- [ ] 🔄 Configuration auto-copy JAR vers serveur
-- [ ] 🔄 Tester le plugin Core in-game
-- [ ] 🔄 Installer map premium (8-15€)
+- [ ] ⚙️ Installer et configurer plugins essentiels
+  - EssentialsX, Vault, LuckPerms
+  - Pack Survival+ (jobs, économie, quêtes)
+  - WorldGuard, CoreProtect
+- [ ] �️ Intégrer map spawn premium
+- [ ] � Configurer grades VIP (Joueur, VIP, VIP+, LEGEND)
+- [ ] � Setup Tebex avec produits (grades, cosmetics)
+- [ ] 🌐 Déployer site web avec boutique
+- [ ] 🎨 Appliquer branding (logo, bannières)
 
-#### ⏳ À venir cette semaine
+### 🎮 Phase 3 - Gameplay & Polish (Semaine 4)
 
-- [ ] ⏳ Créer système de config (config.yml)
-- [ ] ⏳ Scoreboard personnalisé
-- [ ] ⏳ Menu GUI principal (/zc menu)
-- [ ] ⏳ Logo serveur + MOTD
-- [ ] ⏳ Bannière Discord
-- [ ] ⏳ Landing page simple (HTML/CSS)
+**Objectif** : Expérience joueur complète
 
----
+- [ ] ⚡ Créer zones de ressources (fermes, mines)
+- [ ] 📜 Configurer quêtes de démarrage
+- [ ] 🏆 Système de récompenses (votes, événements)
+- [ ] 🎨 Resource pack moderne installé
+- [ ] 🛡️ Protection spawn + zones PvP/PvE
+- [ ] 📊 Balancing économie (prix, salaires, récompenses)
 
-### 🎮 Semaine 2 - Gameplay simple (Jours 8-14)
+### 🚀 Phase 4 - Marketing & Lancement (Semaine 5-6)
 
-**Progression** : `░░░░░░░░░░ 0%`
+**Objectif** : Attirer les premiers joueurs
 
-- [ ] Système de skills (Mining, Combat, Farming)
-- [ ] XP & niveaux par skill
-- [ ] Quêtes quotidiennes (3-5 quêtes)
-- [ ] Système de récompenses
-- [ ] Pets basiques (3-4 pets)
-- [ ] Zones de farm optimisées
-- [ ] Commands joueur (/skills, /quests, /pets)
-- [ ] Test load serveur (50 joueurs)
-
----
-
-### 🪙 Semaine 3 - Monétisation + polish (Jours 15-21)
-
-**Progression** : `░░░░░░░░░░ 0%`
-
-- [ ] Compte Tebex + intégration
-- [ ] Shop web (grades, cosmetics, boosts)
-- [ ] Système de grades (VIP, VIP+, LEGEND)
-- [ ] Permissions par grade
-- [ ] Cosmetics (particules, titles, trails)
-- [ ] Pets premium
-- [ ] Polish UI/UX
-- [ ] Trailer TikTok 20s
-- [ ] Screenshots marketing
-
----
-
-### 🚀 Semaine 4 - Finalisation + Lancement (Jours 22-30)
-
-**Progression** : `░░░░░░░░░░ 0%`
-
-- [ ] Tests complets gameplay
-- [ ] Tests charge serveur
-- [ ] Correction bugs critiques
-- [ ] Équilibrage XP/ressources
-- [ ] Documentation joueur
-- [ ] Règles serveur
-- [ ] Setup Discord communauté
-- [ ] Mise en production
-- [ ] Beta test (10-20 joueurs)
-- [ ] Lancement officiel
-- [ ] Communication réseaux sociaux
+- [ ] 🎬 Publier trailer sur TikTok, YouTube, Twitter
+- [ ] 💬 Créer Discord communauté (+ bot vote rewards)
+- [ ] 📢 Listing sur serveurs top (MC-Market, TopG, etc.)
+- [ ] 🧪 Beta test avec 5-10 joueurs
+- [ ] 🐛 Correction bugs & ajustements
+- [ ] 🎉 Lancement officiel + campagne marketing
+- [ ] 📈 Suivi analytics (joueurs, ventes, rétention)
 
 ---
 
@@ -240,13 +266,31 @@ Voir [CONTRIBUTING.md](./CONTRIBUTING.md) pour les règles de contribution.
 | Catégorie | Statut | Progression |
 |-----------|--------|-------------|
 | 🏗️ Infrastructure | ✅ Complet | 100% ████████████ |
-| 🎮 Serveur en ligne | ✅ Opérationnel | 100% ████████████ |
-| 🔌 Plugin Core | 🚧 En cours | 30% ███░░░░░░░░░ |
-| 🎨 Graphisme | ⏳ Pas commencé | 0% ░░░░░░░░░░░░ |
-| 🎮 Gameplay | 🚧 Minimal | 5% █░░░░░░░░░░░ |
-| 🪙 Monétisation | ⏳ Pas commencé | 0% ░░░░░░░░░░░░ |
-| 📱 Marketing | ⏳ Pas commencé | 0% ░░░░░░░░░░░░ |
-| **GLOBAL** | 🚧 En cours | **35%** ████░░░░░░░░ |
+| 🎮 Serveur opérationnel | ✅ OK | 100% ████████████ |
+| � Budget assets | � En cours | 0% ░░░░░░░░░░░░ |
+| 🔌 Plugins installés | ⏳ À faire | 0% ░░░░░░░░░░░░ |
+| 🎨 Design & Map | ⏳ Commandé | 0% ░░░░░░░░░░░░ |
+| 🎮 Gameplay configuré | ⏳ À faire | 0% ░░░░░░░░░░░░ |
+| 🪙 Monétisation (Tebex) | ⏳ À faire | 0% ░░░░░░░░░░░░ |
+| 📱 Marketing | ⏳ À faire | 0% ░░░░░░░░░░░░ |
+| **GLOBAL** | 🚧 Pivot solo | **25%** ███░░░░░░░░░ |
+
+## ✅ Changelog Important
+
+**26 novembre 2025** - Pivot stratégique
+
+- 🔄 Passage en mode solo (Adam a quitté le projet)
+- ❌ Abandon développement plugin Java from scratch
+- ✅ Nouvelle approche : plugins existants + assets premium
+- 💰 Budget de 150€ alloué pour assets professionnels
+- 🎯 Focus : Survival+ monétisable plutôt que serveur custom complexe
+
+**16-18 novembre 2025** - Infrastructure
+
+- ✅ Serveur PaperMC 1.21 opérationnel
+- ✅ Docker + MySQL + RCON configurés
+- ✅ Multiplayer testé avec succès
+- ✅ Scripts de gestion créés
 
 ## 📝 Documentation
 
