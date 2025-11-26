@@ -4,7 +4,7 @@
 
 [![Setup](https://img.shields.io/badge/Setup-✅_Complete-brightgreen)]()
 [![Type](https://img.shields.io/badge/Type-Survival+-blue)]()
-[![Budget](https://img.shields.io/badge/Budget-150€-yellow)]()
+[![Budget](https://img.shields.io/badge/Budget-60€-yellow)]()
 [![Status](https://img.shields.io/badge/Status-En_développement-orange)]()
 
 ## 📊 État Actuel du Projet
@@ -17,66 +17,121 @@
 ```
 
 **🎮 Serveur** : `91.99.237.55:25565` (Minecraft Java 1.21)
-**� Développeur** : Otmane (projet solo, Adam a abandonné)
-**💰 Budget investi** : 150€ en assets premium
+**👤 Développeur** : Otmane (projet solo, Adam a abandonné)
+**💰 Budget optimisé** : 50-60€ en assets critiques (map + logo)
 
 ## 🎯 Vision du Projet
 
 Créer un serveur Minecraft **Survival+ monétisable** avec :
 
-- ✨ Expérience visuelle premium (assets achetés)
-- 🎮 Gameplay survie amélioré (économie, jobs, quêtes)
+- 💻 **Code custom** (Java + Spigot API) - Gameplay unique
+- ✨ Expérience visuelle premium (spawn acheté + design codé)
+- 🎮 Gameplay innovant (économie, jobs, quêtes, arenas, boss)
 - 💰 Monétisation intelligente (grades VIP, cosmetics)
 - 📈 Infrastructure scalable et stable
 
-**Type de serveur** : Survie Vanilla+ avec économie et système de grades
-**Objectif** : Lancement en **4-6 semaines** avec première rentabilité
+**Type de serveur** : Survie Custom avec économie, arenas PvP, boss customs, quêtes
+**Objectif** : Développer en **4-6 semaines** avec code 100% maîtrisé
 
-## 💰 Budget & Investissements (150€)
+## 🎨 Approche : Coder + Achats Stratégiques
 
-Pour accélérer le développement et garantir une qualité pro, investissement de **150€** en assets premium :
+### 💻 **Ce que JE CODE** (économie + fun + unique)
 
-### � Assets visuels (105€)
+- ✅ Plugin Java custom (ZineCraftCore - déjà commencé)
+- ✅ Gameplay unique (arenas, boss, parkour)
+- ✅ Économie & jobs personnalisés
+- ✅ Système de quêtes custom
+- ✅ Grades VIP avec avantages codés
+- ✅ Site web (Next.js ou HTML/CSS)
+- ✅ Trailer gameplay (OBS + Capcut gratuit)
+
+### 💰 **Ce que J'ACHÈTE** (gain de temps maximum)
+
+**Budget optimisé : 50-60€** (au lieu de 150€)
+
+1. **Map spawn premium** (40€) - Fiverr
+   - Spawn professionnel = critique pour première impression
+   - Économie de 2-3 semaines de build
+
+2. **Logo + bannière pack** (15-20€) - Fiverr
+   - Identité visuelle pro pour marketing
+   - Économie de 2 jours de design
+
+**Total : 50-60€** investis stratégiquement
+
+### ✅ **AVANTAGES de cette approche**
+
+#### 💻 **Plus fun & éducatif**
+
+- Apprentissage Java + Minecraft Spigot/Paper API
+- Fierté d'avoir créé son serveur from scratch
+- Gameplay 100% unique (pas du copier-coller)
+- Portfolio de dev pour CV
+
+#### 💰 **Économie intelligente**
+
+- 50-60€ au lieu de 150€ (100€ économisés)
+- Investissement uniquement sur ce qui prend des semaines
+- Site web + trailer = gratuit (vous le faites)
+
+#### 🎯 **Différenciation**
+
+- Serveur custom codé = rare et apprécié par les joueurs
+- Pas un énième clone avec plugins génériques
+- Mécaniques uniques impossibles avec plugins existants
+
+#### 📈 **Scalabilité & Contrôle**
+
+- Vous maîtrisez 100% du code = ajouts/modifications faciles
+- Pas dépendant de plugins externes (bugs, compatibilité)
+- Performance optimisée (code sur mesure)
+- Monétisation flexible (vous codez ce que vous voulez vendre)
+
+## 💰 Budget & Investissements (50-60€)
+
+Approche optimisée : **coder soi-même** + acheter uniquement les assets critiques
+
+### 🎨 Assets visuels (55€)
 
 1. **Map spawn premium** (40€) - Fiverr
    - Spawn central professionnel
    - Première impression critique pour retenir les joueurs
+   - **Économie** : 2-3 semaines de build
 
-2. **Logo + bannière pack** (25€) - Fiverr
+2. **Logo + bannière pack** (15€) - Fiverr
    - Logo serveur HD
    - Bannières Discord/Site web
    - Identité visuelle cohérente
+   - **Économie** : 2 jours de design
 
-3. **Trailer vidéo 30 sec** (40€) - Fiverr
-   - Vidéo marketing professionnelle
-   - Pour TikTok/YouTube/Discord
-   - Attire les joueurs
+### 💻 Développement maison (0€ mais du temps)
 
-### �️ Outils & Plugins (45€)
+3. **Site web** - Codé par vous (Next.js ou HTML/CSS)
+   - Avec intégration Tebex API
+   - **Économie** : 30€ vs template acheté
 
-4. **Template site Tebex** (30€) - ThemeForest
-   - Site web avec boutique intégrée
-   - Monétisation immédiate
-   - Design moderne responsive
+4. **Plugins custom** - ZineCraftCore (Java)
+   - Économie, jobs, quêtes, arenas, boss
+   - **Économie** : 15€ vs pack générique + gameplay unique
 
-5. **Pack plugins "Survival+"** (15€) - Polymart
-   - Économie + Jobs + Quêtes préconfigurés
-   - Gain de temps : 2-3 semaines de configuration
-   - Système complet clé en main
+5. **Trailer vidéo** - Fait par vous (OBS + Capcut)
+   - Capture gameplay + montage gratuit
+   - **Économie** : 40€ vs Fiverr
 
-### � ROI estimé
+### 📊 ROI estimé
 
-- **Investissement** : 150€
-- **Gain de temps** : 3-4 semaines de développement
-- **Qualité visuelle** : x10 vs fait maison
-- **Rentabilité** : 10-15 ventes VIP à 10-15€ = breakeven
-- **Timeline** : Rentable en 1-2 mois avec bon marketing
+- **Investissement** : 50-60€ (au lieu de 150€)
+- **Gain de temps** : 2-3 semaines (uniquement spawn)
+- **Qualité** : Spawn pro + code 100% custom
+- **Économies** : 90-100€ en développant vous-même
+- **Avantage** : Gameplay unique + maîtrise totale du code
 
 ## 🚀 Stack Technique
 
 ### Backend & Serveur
 
 - **PaperMC 1.21** (Java 21) - Performance optimale
+- **ZineCraftCore** - Plugin custom Java (économie, arenas, boss, quêtes)
 - **MySQL 8.0** - Base de données (économie, joueurs, stats)
 - **RCON** - Gestion à distance
 
@@ -86,21 +141,26 @@ Pour accélérer le développement et garantir une qualité pro, investissement 
 - **Docker Compose** - Déploiement simplifié
 - **Git/GitHub** - Versioning
 
-### Plugins (Gratuits + Premium)
+### Plugins Custom (Codés maison)
 
-- **EssentialsX** - Commandes de base + économie
-- **Vault** - API économie
-- **LuckPerms** - Système de grades VIP
-- **WorldEdit/WorldGuard** - Protection & édition
-- **Pack Survival+ Premium** (15€) - Jobs, quêtes, économie avancée
-- **BuycraftX/Tebex** - Boutique en ligne (monétisation)
+- **ZineCraftCore** - Plugin principal custom
+  - Système d'économie & argent virtuel
+  - ArenaManager - Combat PvP 1v1/2v2
+  - BossManager - Boss customs avec drops
+  - ParkourManager - Parkours avec récompenses
+  - Système de quêtes personnalisé
+  - Grades VIP avec permissions custom
+- **Plugins communautaires** (support)
+  - Vault - API économie
+  - LuckPerms - Gestion permissions
+  - WorldEdit/WorldGuard - Protection
 
 ### Assets Premium
 
-- Map spawn custom (Fiverr)
-- Resource pack moderne
-- Logo & branding
-- Site web avec boutique
+- Map spawn custom (Fiverr 40€)
+- Logo & branding (Fiverr 15€)
+- Site web codé maison (Next.js/React)
+- Trailer fait maison (OBS + Capcut)
 
 ## 📁 Structure du Projet
 
