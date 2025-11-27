@@ -13,6 +13,7 @@ import fr.zinecraft.core.listeners.NPCListener;
 import fr.zinecraft.core.listeners.ShopListener;
 import fr.zinecraft.core.listeners.QuestListener;
 import fr.zinecraft.core.listeners.EventMultiplierListener;
+import fr.zinecraft.core.listeners.PortalListener;
 import fr.zinecraft.core.commands.CombatCommand;
 import fr.zinecraft.core.commands.Combat1v1Command;
 import fr.zinecraft.core.commands.Combat2v2Command;
@@ -32,6 +33,8 @@ import fr.zinecraft.core.commands.BalanceCommand;
 import fr.zinecraft.core.commands.PayCommand;
 import fr.zinecraft.core.commands.EconomyCommand;
 import fr.zinecraft.core.commands.ShopCommand;
+import fr.zinecraft.core.commands.PortalCommand;
+import fr.zinecraft.core.commands.LaserCommand;
 import com.zinecraft.commands.VillageCommand;
 import com.zinecraft.commands.TutorialCommand;
 import com.zinecraft.commands.ResetVillageCommand;
@@ -58,6 +61,7 @@ import fr.zinecraft.core.events.EventManager;
 import fr.zinecraft.core.visuals.VisualEffectManager;
 import fr.zinecraft.core.skills.SkillManager;
 import fr.zinecraft.core.commands.SkillCommand;
+import fr.zinecraft.core.portals.PortalManager;
 
 /**
  * ZineCraft Core Plugin
@@ -89,6 +93,7 @@ public class ZineCraftCore extends JavaPlugin {
     private QuestManager questManager;
     private SkillManager skillManager;
     private VillageNPCManager villageNPCManager;
+    private PortalManager portalManager;
 
     @Override
     public void onEnable() {
@@ -131,6 +136,7 @@ public class ZineCraftCore extends JavaPlugin {
         visualEffectManager = new VisualEffectManager(this);
         skillManager = new SkillManager(this);
         villageNPCManager = new VillageNPCManager(this);
+        portalManager = new PortalManager();
         logSuccess("Managers initialized!");
 
         // 4. Enregistrer les commandes
@@ -298,6 +304,13 @@ public class ZineCraftCore extends JavaPlugin {
     }
 
     /**
+     * Récupérer le PortalManager
+     */
+    public PortalManager getPortalManager() {
+        return portalManager;
+    }
+
+    /**
      * Enregistrer toutes les commandes
      */
     private void registerCommands() {
@@ -333,6 +346,8 @@ public class ZineCraftCore extends JavaPlugin {
         getCommand("resetvillage").setExecutor(new ResetVillageCommand(this));
         getCommand("villagenpc").setExecutor(new VillageNPCCommand(villageNPCManager));
         getCommand("villagewall").setExecutor(new VillageWallCommand(this));
+        getCommand("6").setExecutor(new PortalCommand());
+        getCommand("laser").setExecutor(new LaserCommand());
     }
 
     /**
@@ -352,6 +367,7 @@ public class ZineCraftCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new ShopListener(this), this);
         getServer().getPluginManager().registerEvents(new QuestListener(this), this);
         getServer().getPluginManager().registerEvents(new EventMultiplierListener(this), this);
+        getServer().getPluginManager().registerEvents(new PortalListener(), this);
     }
 
     /**

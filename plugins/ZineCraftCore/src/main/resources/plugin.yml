@@ -122,6 +122,14 @@ commands:
     description: "Construire/supprimer les fortifications du village"
     usage: /villagewall [build|remove]
     aliases: [vwall, fortification]
+  6:
+    description: Créer des portails de téléportation
+    usage: /6
+    aliases: [portal, portail, tp6]
+  laser:
+    description: Activer un système de lasers défensifs
+    usage: /laser
+    aliases: [lasers, defense]
 
 permissions:
   zinecraft.*:
