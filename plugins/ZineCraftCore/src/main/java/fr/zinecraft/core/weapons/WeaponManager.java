@@ -126,6 +126,9 @@ public class WeaponManager {
             case VOID_SCYTHE:
                 voidScythePower(player);
                 break;
+            case FIREBALL:
+                fireballPower(player);
+                break;
         }
         
         // Mettre le cooldown
@@ -412,6 +415,33 @@ public class WeaponManager {
         }.runTaskTimer(plugin, 0L, 2L);
         
         player.sendMessage(ChatColor.DARK_PURPLE + "🌀 Vortex du vide!");
+    }
+    
+    /**
+     * Boule de Feu: Lance une boule de feu explosive
+     */
+    private void fireballPower(Player player) {
+        Location eyeLoc = player.getEyeLocation();
+        Vector direction = eyeLoc.getDirection().normalize();
+        
+        // Créer une boule de feu
+        Fireball fireball = player.getWorld().spawn(
+            eyeLoc.add(direction.multiply(1.5)), 
+            Fireball.class
+        );
+        
+        // Configurer la boule de feu
+        fireball.setShooter(player);
+        fireball.setDirection(direction);
+        fireball.setYield(3.0f); // Puissance de l'explosion
+        fireball.setIsIncendiary(true); // Mettre le feu
+        fireball.setVelocity(direction.multiply(1.5));
+        
+        // Effets visuels
+        player.getWorld().spawnParticle(Particle.FLAME, eyeLoc, 30, 0.3, 0.3, 0.3, 0.05);
+        player.getWorld().playSound(eyeLoc, Sound.ENTITY_GHAST_SHOOT, 1.5f, 1.0f);
+        
+        player.sendMessage(ChatColor.GOLD + "🔥 Boule de feu lancée!");
     }
     
     /**

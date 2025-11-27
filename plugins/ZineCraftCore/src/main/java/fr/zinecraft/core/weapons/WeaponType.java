@@ -160,6 +160,21 @@ public enum WeaponType {
         Particle.PORTAL,
         Sound.BLOCK_PORTAL_TRIGGER,
         0x4B0082 // Indigo
+    ),
+    
+    FIREBALL(
+        "🔥 Boule de Feu",
+        "Lance des boules de feu dévastatrices",
+        Material.FIRE_CHARGE,
+        22,
+        new String[]{
+            "§7Effet: §cExplosion au contact",
+            "§7Spécial: §6Lance une boule de feu",
+            "§7Cooldown: §a4 secondes"
+        },
+        Particle.FLAME,
+        Sound.ENTITY_GHAST_SHOOT,
+        0xFF6600 // Orange
     );
     
     private final String displayName;
