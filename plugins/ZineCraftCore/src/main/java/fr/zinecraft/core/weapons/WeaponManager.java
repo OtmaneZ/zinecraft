@@ -129,6 +129,12 @@ public class WeaponManager {
             case FIREBALL:
                 fireballPower(player);
                 break;
+            case ICY_DUCK:
+                icyDuckPower(player);
+                break;
+            case FLY_FLY:
+                flyFlyPower(player);
+                break;
         }
         
         // Mettre le cooldown
@@ -442,6 +448,196 @@ public class WeaponManager {
         player.getWorld().playSound(eyeLoc, Sound.ENTITY_GHAST_SHOOT, 1.5f, 1.0f);
         
         player.sendMessage(ChatColor.GOLD + "🔥 Boule de feu lancée!");
+    }
+    
+    /**
+     * Canard Glacial: Invoque un canard qui gèle la cible
+     */
+    private void icyDuckPower(Player player) {
+        // Trouver la cible
+        LivingEntity target = null;
+        double closestDistance = 20.0;
+        
+        for (Entity entity : player.getNearbyEntities(20, 20, 20)) {
+            if (entity instanceof LivingEntity && entity != player) {
+                Location eyeLoc = player.getEyeLocation();
+                Vector toEntity = entity.getLocation().toVector().subtract(eyeLoc.toVector()).normalize();
+                Vector direction = eyeLoc.getDirection();
+                
+                // Vérifier si l'entité est dans la direction du regard
+                if (toEntity.dot(direction) > 0.9) {
+                    double distance = player.getLocation().distance(entity.getLocation());
+                    if (distance < closestDistance) {
+                        target = (LivingEntity) entity;
+                        closestDistance = distance;
+                    }
+                }
+            }
+        }
+        
+        if (target == null) {
+            player.sendMessage(ChatColor.RED + "Aucune cible trouvée!");
+            return;
+        }
+        
+        final LivingEntity finalTarget = target;
+        Location targetLoc = target.getLocation();
+        
+        // Faire apparaître un poulet (canard) au-dessus de la cible
+        Location spawnLoc = targetLoc.clone().add(0, 10, 0);
+        Chicken duck = (Chicken) player.getWorld().spawnEntity(spawnLoc, org.bukkit.entity.EntityType.CHICKEN);
+        duck.setCustomName(ChatColor.AQUA + "🦆 Canard Glacial");
+        duck.setCustomNameVisible(true);
+        duck.setInvulnerable(true);
+        duck.setSilent(false);
+        
+        // Effets de glace
+        player.getWorld().spawnParticle(Particle.SNOWFLAKE, spawnLoc, 100, 2, 2, 2, 0.1);
+        player.getWorld().playSound(spawnLoc, Sound.ENTITY_CHICKEN_AMBIENT, 1.5f, 0.8f);
+        
+        // Animation: le canard descend vers la cible
+        new BukkitRunnable() {
+            int ticks = 0;
+            
+            @Override
+            public void run() {
+                ticks++;
+                
+                if (!duck.isValid() || ticks > 40) {
+                    if (duck.isValid()) {
+                        duck.remove();
+                    }
+                    cancel();
+                    return;
+                }
+                
+                // Déplacer le canard vers la cible
+                Location duckLoc = duck.getLocation();
+                Vector direction = finalTarget.getLocation().toVector().subtract(duckLoc.toVector()).normalize();
+                duck.setVelocity(direction.multiply(0.8));
+                
+                // Particules de glace
+                duck.getWorld().spawnParticle(Particle.SNOWFLAKE, duckLoc, 10, 0.5, 0.5, 0.5, 0.05);
+                
+                // Si le canard est proche de la cible
+                if (duckLoc.distance(finalTarget.getLocation()) < 2) {
+                    // Geler la cible
+                    finalTarget.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 10)); // 5 sec
+                    finalTarget.addPotionEffect(new PotionEffect(PotionEffectType.SLOW_DIGGING, 100, 10));
+                    finalTarget.addPotionEffect(new PotionEffect(PotionEffectType.JUMP, 100, 250)); // Ne peut pas sauter
+                    finalTarget.damage(15);
+                    finalTarget.setFreezeTicks(200); // Effet visuel de gel
+                    
+                    // Explosion de glace
+                    finalTarget.getWorld().spawnParticle(Particle.SNOWFLAKE, finalTarget.getLocation(), 200, 2, 2, 2, 0.2);
+                    finalTarget.getWorld().spawnParticle(Particle.CLOUD, finalTarget.getLocation(), 50, 1, 1, 1, 0.1);
+                    finalTarget.getWorld().playSound(finalTarget.getLocation(), Sound.BLOCK_GLASS_BREAK, 2.0f, 0.5f);
+                    finalTarget.getWorld().playSound(finalTarget.getLocation(), Sound.ENTITY_PLAYER_HURT_FREEZE, 2.0f, 1.0f);
+                    
+                    // Message
+                    if (finalTarget instanceof Player) {
+                        ((Player) finalTarget).sendMessage(ChatColor.AQUA + "🦆 Vous avez été gelé par un canard!");
+                    }
+                    
+                    duck.remove();
+                    cancel();
+                }
+            }
+        }.runTaskTimer(plugin, 0L, 2L);
+        
+        player.sendMessage(ChatColor.AQUA + "🦆 Canard glacial invoqué!");
+    }
+    
+    /**
+     * Vole Vole: Fait voler la cible dans les airs
+     */
+    private void flyFlyPower(Player player) {
+        // Trouver la cible
+        LivingEntity target = null;
+        double closestDistance = 20.0;
+        
+        for (Entity entity : player.getNearbyEntities(20, 20, 20)) {
+            if (entity instanceof LivingEntity && entity != player) {
+                Location eyeLoc = player.getEyeLocation();
+                Vector toEntity = entity.getLocation().toVector().subtract(eyeLoc.toVector()).normalize();
+                Vector direction = eyeLoc.getDirection();
+                
+                // Vérifier si l'entité est dans la direction du regard
+                if (toEntity.dot(direction) > 0.9) {
+                    double distance = player.getLocation().distance(entity.getLocation());
+                    if (distance < closestDistance) {
+                        target = (LivingEntity) entity;
+                        closestDistance = distance;
+                    }
+                }
+            }
+        }
+        
+        if (target == null) {
+            player.sendMessage(ChatColor.RED + "Aucune cible trouvée!");
+            return;
+        }
+        
+        final LivingEntity finalTarget = target;
+        
+        // Message à la cible
+        if (finalTarget instanceof Player) {
+            ((Player) finalTarget).sendMessage(ChatColor.YELLOW + "🪶 Vous volez dans les airs!");
+        }
+        
+        // Effets de vol
+        player.getWorld().spawnParticle(Particle.CLOUD, finalTarget.getLocation(), 50, 1, 1, 1, 0.1);
+        player.getWorld().playSound(finalTarget.getLocation(), Sound.ENTITY_BAT_TAKEOFF, 1.5f, 1.2f);
+        
+        // Animation de vol: 5 blocs/seconde pendant 5 secondes
+        new BukkitRunnable() {
+            int ticks = 0;
+            final int maxTicks = 100; // 5 secondes (100 ticks)
+            final double blocksPerSecond = 5.0;
+            final double velocityPerTick = blocksPerSecond / 20.0; // Convertir en vélocité par tick
+            
+            @Override
+            public void run() {
+                ticks++;
+                
+                if (!finalTarget.isValid() || !finalTarget.isOnGround() && ticks > maxTicks) {
+                    cancel();
+                    return;
+                }
+                
+                if (ticks <= maxTicks) {
+                    // Faire voler vers le haut
+                    Vector velocity = finalTarget.getVelocity();
+                    velocity.setY(velocityPerTick);
+                    finalTarget.setVelocity(velocity);
+                    
+                    // Particules de vol
+                    finalTarget.getWorld().spawnParticle(Particle.CLOUD, 
+                        finalTarget.getLocation(), 5, 0.3, 0.3, 0.3, 0.02);
+                    
+                    // Empêcher les dégâts de chute pendant le vol
+                    finalTarget.setFallDistance(0);
+                    
+                    // Son de vol toutes les 20 ticks
+                    if (ticks % 20 == 0) {
+                        finalTarget.getWorld().playSound(finalTarget.getLocation(), 
+                            Sound.ENTITY_BAT_AMBIENT, 0.5f, 1.5f);
+                    }
+                } else {
+                    // Après 5 secondes, laisser tomber
+                    finalTarget.getWorld().spawnParticle(Particle.EXPLOSION_LARGE, 
+                        finalTarget.getLocation(), 3, 0.5, 0.5, 0.5, 0);
+                    
+                    if (finalTarget instanceof Player) {
+                        ((Player) finalTarget).sendMessage(ChatColor.RED + "💥 Vous retombez!");
+                    }
+                    
+                    cancel();
+                }
+            }
+        }.runTaskTimer(plugin, 0L, 1L);
+        
+        player.sendMessage(ChatColor.YELLOW + "🪶 Cible envoyée dans les airs!");
     }
     
     /**
