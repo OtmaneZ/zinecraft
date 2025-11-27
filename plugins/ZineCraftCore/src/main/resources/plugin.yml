@@ -114,6 +114,14 @@ commands:
     description: Nettoyer et réinitialiser la zone du village
     usage: /resetvillage
     aliases: [cleanvillage, clearvillage, resetzone]
+  villagenpc:
+    description: "Gérer les PNJ et animaux du village"
+    usage: /villagenpc [spawn|clear|count]
+    aliases: [villagepopulation, vnpc]
+  villagewall:
+    description: "Construire/supprimer les fortifications du village"
+    usage: /villagewall [build|remove]
+    aliases: [vwall, fortification]
 
 permissions:
   zinecraft.*:

@@ -125,7 +125,7 @@ public class TutorialZoneBuilder {
         plugin.getLogger().info("  - SpawnPoint placé au centre");
 
         // 2. Arène de combat à l'EST (25, 0) - 25 blocs distance = rayon spawn (3) + rayon arena (10) + marge (12)
-        CombatArenaBuilder arenaBuilder = new CombatArenaBuilder(20, 20);
+        CombatArenaBuilder arenaBuilder = new CombatArenaBuilder(20);
         Location arenaLoc = new Location(world, cx + 25, cy, cz);
         arenaBuilder.build(session, arenaLoc);
         plugin.getLogger().info("  - CombatArena placée à l'EST (+25, 0)");

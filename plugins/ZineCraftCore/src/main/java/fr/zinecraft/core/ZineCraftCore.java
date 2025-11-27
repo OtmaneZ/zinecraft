@@ -35,6 +35,9 @@ import fr.zinecraft.core.commands.ShopCommand;
 import com.zinecraft.commands.VillageCommand;
 import com.zinecraft.commands.TutorialCommand;
 import com.zinecraft.commands.ResetVillageCommand;
+import com.zinecraft.commands.VillageNPCCommand;
+import com.zinecraft.commands.VillageWallCommand;
+import com.zinecraft.npcs.VillageNPCManager;
 import fr.zinecraft.core.commands.QuestCommand;
 import fr.zinecraft.core.arena.ArenaManager;
 import fr.zinecraft.core.economy.EconomyManager;
@@ -85,6 +88,7 @@ public class ZineCraftCore extends JavaPlugin {
     private ShopManager shopManager;
     private QuestManager questManager;
     private SkillManager skillManager;
+    private VillageNPCManager villageNPCManager;
 
     @Override
     public void onEnable() {
@@ -126,6 +130,7 @@ public class ZineCraftCore extends JavaPlugin {
         eventManager = new EventManager(this);
         visualEffectManager = new VisualEffectManager(this);
         skillManager = new SkillManager(this);
+        villageNPCManager = new VillageNPCManager(this);
         logSuccess("Managers initialized!");
 
         // 4. Enregistrer les commandes
@@ -286,6 +291,13 @@ public class ZineCraftCore extends JavaPlugin {
     }
 
     /**
+     * Récupérer le VillageNPCManager
+     */
+    public VillageNPCManager getVillageNPCManager() {
+        return villageNPCManager;
+    }
+
+    /**
      * Enregistrer toutes les commandes
      */
     private void registerCommands() {
@@ -319,6 +331,8 @@ public class ZineCraftCore extends JavaPlugin {
         getCommand("village").setExecutor(new VillageCommand(this));
         getCommand("tutorial").setExecutor(new TutorialCommand(this));
         getCommand("resetvillage").setExecutor(new ResetVillageCommand(this));
+        getCommand("villagenpc").setExecutor(new VillageNPCCommand(villageNPCManager));
+        getCommand("villagewall").setExecutor(new VillageWallCommand(this));
     }
 
     /**

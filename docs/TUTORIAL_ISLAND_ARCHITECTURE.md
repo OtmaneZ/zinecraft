@@ -1,11 +1,13 @@
 # Tutorial Island - Architecture Modulaire
 
 ## Vue d'ensemble
+
 Tutorial Island est la deuxième zone de ZineCraft (Priority 1), construite avec la même architecture modulaire que le Village. L'île est surélevée à Y=70, circulaire (100x100), et contient 5 structures principales.
 
 ## Structures créées
 
 ### 1. **SpawnPointBuilder** - Point d'apparition
+
 - **Fichier**: `SpawnPointBuilder.java`
 - **Rayon**: 3 blocs
 - **Composants**:
@@ -17,6 +19,7 @@ Tutorial Island est la deuxième zone de ZineCraft (Priority 1), construite avec
   - 4 fleurs décoratives (Poppy, Dandelion, Blue Orchid, Allium)
 
 ### 2. **CombatArenaBuilder** - Arène de combat
+
 - **Fichier**: `CombatArenaBuilder.java`
 - **Dimensions**: 20x20 blocs
 - **Rayon**: 10 blocs
@@ -28,6 +31,7 @@ Tutorial Island est la deuxième zone de ZineCraft (Priority 1), construite avec
   - Panneau d'instructions
 
 ### 3. **NPCPlatformBuilder** - Plateformes PNJ (x3)
+
 - **Fichier**: `NPCPlatformBuilder.java`
 - **Dimensions**: 5x5 blocs par plateforme
 - **Rayon**: 3 blocs chacune
@@ -43,6 +47,7 @@ Tutorial Island est la deuxième zone de ZineCraft (Priority 1), construite avec
   - **MARCHAND**: Barrel + 2 emerald blocks
 
 ### 4. **PortalBuilder** - Portail vers Village
+
 - **Fichier**: `PortalBuilder.java`
 - **Dimensions**: 4x5 blocs (largeur x hauteur)
 - **Rayon**: 3 blocs
@@ -55,6 +60,7 @@ Tutorial Island est la deuxième zone de ZineCraft (Priority 1), construite avec
 ## Architecture du TutorialZoneBuilder
 
 ### Méthode `generate()`
+
 ```
 1. buildIsland()      - Terrain circulaire Y=70
 2. buildStructures()  - Placement de toutes les structures
@@ -66,6 +72,7 @@ Tutorial Island est la deuxième zone de ZineCraft (Priority 1), construite avec
 **Centre de l'île**: `(0, 70, 500)` selon map_to_code.md
 
 **Distances calculées pour éviter chevauchement**:
+
 ```
 SpawnPoint:      (0, 0)        - Centre, rayon 3
 CombatArena:     (25, 0)       - EST, rayon 10, distance 25 = 3 + 10 + 12 marge
@@ -76,6 +83,7 @@ Portal:          (0, 35)       - SUD, rayon 3, sortie vers village
 ```
 
 **Logique de distance**:
+
 - SpawnPoint au centre pour apparition joueur
 - Arena à l'EST (25 blocs) = assez loin pour ne pas gêner spawn
 - NPCs répartis en triangle (OUEST, NORD, NORD-EST) à ~20 blocs
@@ -87,11 +95,13 @@ Portal:          (0, 35)       - SUD, rayon 3, sortie vers village
 **Élévation**: Y=70 (10 blocs au-dessus du sol Y=60)
 
 **Couches**:
+
 - **Surface**: Grass blocks (Y=70)
 - **Sous-sol**: 5 couches de dirt (Y=65 à Y=69)
 - **Base**: 3 couches de stone (Y=62 à Y=64)
 
 **Algorithme circulaire**:
+
 ```java
 for (x, z) in [-50, 50]:
     if sqrt(x² + z²) <= 50:
@@ -101,6 +111,7 @@ for (x, z) in [-50, 50]:
 ## Commande associée
 
 **TutorialCommand.java**:
+
 - `/tutorial` - Génère l'île complète
 - Alias: `/tuto`, `/tutoisland`
 - Permission: `zinecraft.tutorial`
@@ -120,6 +131,7 @@ for (x, z) in [-50, 50]:
 ## État actuel
 
 ### ✅ Complété
+
 - [x] SpawnPointBuilder.java (beacon + décor)
 - [x] CombatArenaBuilder.java (20x20 arena)
 - [x] NPCPlatformBuilder.java (3 plateformes paramétriques)
@@ -129,6 +141,7 @@ for (x, z) in [-50, 50]:
 - [x] Logs informatifs pour debug
 
 ### ❌ À tester
+
 - [ ] Compiler le plugin (bloqué par erreurs SkillCommand)
 - [ ] Tester `/tutorial` in-game
 - [ ] Vérifier espacement des structures
@@ -156,6 +169,7 @@ for (x, z) in [-50, 50]:
 ## Map_to_code.md conformité
 
 ✅ **Respect du plan**:
+
 - Coordonnées: (0, 500) ✓
 - Île 100x100 ✓
 - Beacon spawn ✓
@@ -165,6 +179,7 @@ for (x, z) in [-50, 50]:
 - Niveau 1-5 (à implémenter côté mobs)
 
 **Différences**:
+
 - Y=70 au lieu de "niveau mer" (meilleure visibilité)
 - Portal en stained glass au lieu de nether portal (décoratif)
 - Positions calculées mathématiquement (non spécifiées dans map)
