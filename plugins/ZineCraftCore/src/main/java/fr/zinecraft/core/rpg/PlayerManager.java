@@ -309,4 +309,11 @@ public class PlayerManager {
             plugin.getLogger().log(Level.SEVERE, "Erreur fermeture MySQL", e);
         }
     }
+    
+    /**
+     * Obtenir la connexion MySQL (pour QuestManager)
+     */
+    public Connection getConnection() {
+        return connection;
+    }
 }

@@ -66,6 +66,30 @@ commands:
     description: Choisir et gérer sa classe RPG
     usage: /class [list|info|choose|skills|spawnnpc]
     aliases: [classe, rpgclass]
+  stats:
+    description: Voir son niveau et ses statistiques RPG
+    usage: /stats
+    aliases: [level, niveau, profile, profil]
+  balance:
+    description: Voir son solde de Zines
+    usage: /balance
+    aliases: [bal, money, argent, zines]
+  pay:
+    description: Envoyer des Zines à un autre joueur
+    usage: /pay <joueur> <montant>
+    aliases: [transfer, send, donner]
+  economy:
+    description: Commandes admin pour gérer l'économie
+    usage: /economy [give|take|set|check] <joueur> <montant>
+    aliases: [eco, econ, admineco]
+  shop:
+    description: Ouvrir la boutique pour acheter/vendre des items
+    usage: /shop
+    aliases: [boutique, store, market]
+  quest:
+    description: Gérer vos quêtes
+    usage: /quest [list|available|start|info|progress|complete]
+    aliases: [quete, quests, q]
   event:
     description: Gérer les événements dynamiques
     usage: /event [start|stop|info|list]
@@ -74,6 +98,10 @@ commands:
     description: Gérer les effets visuels
     usage: /effect [set|remove|list]
     aliases: [aura, visual, fx]
+  village:
+    description: Générer automatiquement le Village Spawn
+    usage: /village
+    aliases: [genvillage, buildvillage]
 
 permissions:
   zinecraft.*:

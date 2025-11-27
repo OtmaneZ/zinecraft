@@ -10,6 +10,8 @@ import fr.zinecraft.core.listeners.BossListener;
 import fr.zinecraft.core.listeners.WeaponListener;
 import fr.zinecraft.core.listeners.RPGPlayerListener;
 import fr.zinecraft.core.listeners.NPCListener;
+import fr.zinecraft.core.listeners.ShopListener;
+import fr.zinecraft.core.listeners.QuestListener;
 import fr.zinecraft.core.commands.CombatCommand;
 import fr.zinecraft.core.commands.Combat1v1Command;
 import fr.zinecraft.core.commands.Combat2v2Command;
@@ -25,7 +27,16 @@ import fr.zinecraft.core.commands.ScaryZoneCommand;
 import fr.zinecraft.core.commands.ClassCommand;
 import fr.zinecraft.core.commands.EventCommand;
 import fr.zinecraft.core.commands.EffectCommand;
+import fr.zinecraft.core.commands.BalanceCommand;
+import fr.zinecraft.core.commands.PayCommand;
+import fr.zinecraft.core.commands.EconomyCommand;
+import fr.zinecraft.core.commands.ShopCommand;
+import fr.zinecraft.core.builders.VillageBuilder;
+import fr.zinecraft.core.commands.QuestCommand;
 import fr.zinecraft.core.arena.ArenaManager;
+import fr.zinecraft.core.economy.EconomyManager;
+import fr.zinecraft.core.economy.ShopManager;
+import fr.zinecraft.core.quests.QuestManager;
 import fr.zinecraft.core.parkour.ParkourManager;
 import fr.zinecraft.core.boss.BossManager;
 import fr.zinecraft.core.pets.PetManager;
@@ -34,6 +45,9 @@ import fr.zinecraft.core.powers.PowerManager;
 import fr.zinecraft.core.rpg.PlayerManager;
 import fr.zinecraft.core.rpg.ClassManager;
 import fr.zinecraft.core.rpg.NPCManager;
+import fr.zinecraft.core.rpg.LevelManager;
+import fr.zinecraft.core.commands.StatsCommand;
+import fr.zinecraft.core.listeners.XPListener;
 import fr.zinecraft.core.events.EventManager;
 import fr.zinecraft.core.visuals.VisualEffectManager;
 
@@ -59,13 +73,12 @@ public class ZineCraftCore extends JavaPlugin {
     private ClassManager classManager;
     private NPCManager npcManager;
     private NPCListener npcListener;
+    private LevelManager levelManager;
     private EventManager eventManager;
     private VisualEffectManager visualEffectManager;
-
-    // Managers (à créer plus tard)
-    // private LevelManager levelManager;
-    // private QuestManager questManager;
-    // private EconomyManager economyManager;
+    private EconomyManager economyManager;
+    private ShopManager shopManager;
+    private QuestManager questManager;
 
     @Override
     public void onEnable() {
@@ -100,6 +113,10 @@ public class ZineCraftCore extends JavaPlugin {
         powerManager = new PowerManager(this);
         classManager = new ClassManager(this);
         npcManager = new NPCManager(this, classManager);
+        levelManager = new LevelManager(this);
+        economyManager = new EconomyManager(this);
+        shopManager = new ShopManager(this);
+        questManager = new QuestManager(this);
         eventManager = new EventManager(this);
         visualEffectManager = new VisualEffectManager(this);
         logSuccess("Managers initialized!");
@@ -208,6 +225,13 @@ public class ZineCraftCore extends JavaPlugin {
     }
 
     /**
+     * Récupérer le LevelManager
+     */
+    public LevelManager getLevelManager() {
+        return levelManager;
+    }
+
+    /**
      * Récupérer l'EventManager
      */
     public EventManager getEventManager() {
@@ -219,6 +243,27 @@ public class ZineCraftCore extends JavaPlugin {
      */
     public VisualEffectManager getVisualEffectManager() {
         return visualEffectManager;
+    }
+
+    /**
+     * Récupérer l'EconomyManager
+     */
+    public EconomyManager getEconomyManager() {
+        return economyManager;
+    }
+
+    /**
+     * Récupérer le ShopManager
+     */
+    public ShopManager getShopManager() {
+        return shopManager;
+    }
+
+    /**
+     * Récupérer le QuestManager
+     */
+    public QuestManager getQuestManager() {
+        return questManager;
     }
 
     /**
@@ -238,8 +283,15 @@ public class ZineCraftCore extends JavaPlugin {
         getCommand("power").setExecutor(new PowerCommand());
         getCommand("scary").setExecutor(new ScaryZoneCommand());
         getCommand("class").setExecutor(new ClassCommand(playerManager, classManager, npcManager));
+        getCommand("stats").setExecutor(new StatsCommand(playerManager, levelManager));
+        getCommand("balance").setExecutor(new BalanceCommand(this));
+        getCommand("pay").setExecutor(new PayCommand(this));
+        getCommand("economy").setExecutor(new EconomyCommand(this));
+        getCommand("shop").setExecutor(new ShopCommand(this));
+        getCommand("quest").setExecutor(new QuestCommand(this));
         getCommand("event").setExecutor(new EventCommand());
         getCommand("effect").setExecutor(new EffectCommand());
+        getCommand("village").setExecutor(new VillageBuilder());
     }
 
     /**
@@ -255,6 +307,9 @@ public class ZineCraftCore extends JavaPlugin {
         npcListener = new NPCListener();
         npcListener.setNPCManager(npcManager);
         getServer().getPluginManager().registerEvents(npcListener, this);
+        getServer().getPluginManager().registerEvents(new XPListener(levelManager), this);
+        getServer().getPluginManager().registerEvents(new ShopListener(this), this);
+        getServer().getPluginManager().registerEvents(new QuestListener(this), this);
     }
 
     /**
