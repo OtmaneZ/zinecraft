@@ -130,6 +130,10 @@ commands:
     description: Activer un système de lasers défensifs
     usage: /laser
     aliases: [lasers, defense]
+  mega:
+    description: Obtenir 20 cœurs supplémentaires pendant 3 secondes
+    usage: /mega
+    aliases: [megasante, megahealth, superhp]
 
 permissions:
   zinecraft.*:

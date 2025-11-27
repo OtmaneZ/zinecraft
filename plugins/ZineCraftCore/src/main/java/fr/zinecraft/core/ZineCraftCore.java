@@ -35,6 +35,7 @@ import fr.zinecraft.core.commands.EconomyCommand;
 import fr.zinecraft.core.commands.ShopCommand;
 import fr.zinecraft.core.commands.PortalCommand;
 import fr.zinecraft.core.commands.LaserCommand;
+import fr.zinecraft.core.commands.MegaHealthCommand;
 import com.zinecraft.commands.VillageCommand;
 import com.zinecraft.commands.TutorialCommand;
 import com.zinecraft.commands.ResetVillageCommand;
@@ -348,6 +349,7 @@ public class ZineCraftCore extends JavaPlugin {
         getCommand("villagewall").setExecutor(new VillageWallCommand(this));
         getCommand("6").setExecutor(new PortalCommand());
         getCommand("laser").setExecutor(new LaserCommand());
+        getCommand("mega").setExecutor(new MegaHealthCommand());
     }
 
     /**
