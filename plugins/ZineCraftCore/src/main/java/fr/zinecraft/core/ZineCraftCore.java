@@ -34,6 +34,7 @@ import fr.zinecraft.core.commands.EconomyCommand;
 import fr.zinecraft.core.commands.ShopCommand;
 import com.zinecraft.commands.VillageCommand;
 import com.zinecraft.commands.TutorialCommand;
+import com.zinecraft.commands.ResetVillageCommand;
 import fr.zinecraft.core.commands.QuestCommand;
 import fr.zinecraft.core.arena.ArenaManager;
 import fr.zinecraft.core.economy.EconomyManager;
@@ -52,6 +53,8 @@ import fr.zinecraft.core.commands.StatsCommand;
 import fr.zinecraft.core.listeners.XPListener;
 import fr.zinecraft.core.events.EventManager;
 import fr.zinecraft.core.visuals.VisualEffectManager;
+import fr.zinecraft.core.skills.SkillManager;
+import fr.zinecraft.core.commands.SkillCommand;
 
 /**
  * ZineCraft Core Plugin
@@ -81,6 +84,7 @@ public class ZineCraftCore extends JavaPlugin {
     private EconomyManager economyManager;
     private ShopManager shopManager;
     private QuestManager questManager;
+    private SkillManager skillManager;
 
     @Override
     public void onEnable() {
@@ -121,6 +125,7 @@ public class ZineCraftCore extends JavaPlugin {
         questManager = new QuestManager(this);
         eventManager = new EventManager(this);
         visualEffectManager = new VisualEffectManager(this);
+        skillManager = new SkillManager(this);
         logSuccess("Managers initialized!");
 
         // 4. Enregistrer les commandes
@@ -144,6 +149,11 @@ public class ZineCraftCore extends JavaPlugin {
         // Arrêter les événements
         if (eventManager != null) {
             eventManager.shutdown();
+        }
+
+        // Arrêter le système de skills
+        if (skillManager != null) {
+            skillManager.shutdown();
         }
 
         // Sauvegarder les données RPG
@@ -269,6 +279,13 @@ public class ZineCraftCore extends JavaPlugin {
     }
 
     /**
+     * Récupérer le SkillManager
+     */
+    public SkillManager getSkillManager() {
+        return skillManager;
+    }
+
+    /**
      * Enregistrer toutes les commandes
      */
     private void registerCommands() {
@@ -293,8 +310,15 @@ public class ZineCraftCore extends JavaPlugin {
         getCommand("quest").setExecutor(new QuestCommand(this));
         getCommand("event").setExecutor(new EventCommand(this));
         getCommand("effect").setExecutor(new EffectCommand());
+
+        // Skill command with tab completion
+        SkillCommand skillCommand = new SkillCommand(this);
+        getCommand("skill").setExecutor(skillCommand);
+        getCommand("skill").setTabCompleter(skillCommand);
+
         getCommand("village").setExecutor(new VillageCommand(this));
         getCommand("tutorial").setExecutor(new TutorialCommand(this));
+        getCommand("resetvillage").setExecutor(new ResetVillageCommand(this));
     }
 
     /**

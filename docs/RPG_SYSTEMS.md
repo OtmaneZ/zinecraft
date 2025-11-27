@@ -31,13 +31,14 @@ ZineCraft est un serveur Minecraft PaperMC 1.21 avec un système RPG complet con
 - **Technique** : Architecture modulaire, MySQL, performances optimisées
 
 ### Statistiques
-- **Plugin** : 367 KB compilé
-- **Code** : ~5000 lignes Java
+- **Plugin** : 485 KB compilé
+- **Code** : ~8500 lignes Java
 - **Tables MySQL** : 7 tables
 - **Classes** : 8 (3 gratuites, 5 premium)
-- **Compétences** : 32 (4 par classe)
+- **Compétences** : 32 skills (4 par classe) - **NOUVEAU ✨**
 - **Items shop** : 45 items en 8 catégories
 - **Quêtes** : 3 quêtes initiales (extensible)
+- **Événements** : 10 types d'événements dynamiques - **NOUVEAU 🎉**
 
 ---
 
@@ -991,45 +992,219 @@ docker restart zinecraft-papermc
 
 ---
 
-## 🎉 Conclusion
+## 🎉 Phase 2 - Systèmes Avancés (27 Nov 2025)
 
-Le serveur ZineCraft dispose maintenant d'un système RPG complet et fonctionnel, prêt pour la monétisation via YouTube. Les 6 tâches de la Phase 1 sont terminées avec succès.
+### ⚡ Event System - Événements Dynamiques
 
-### Statistiques finales
-- ✅ **5000+ lignes** de code Java
-- ✅ **7 tables** MySQL
-- ✅ **8 classes** RPG avec 32 compétences
-- ✅ **45 items** dans le shop
-- ✅ **3 quêtes** initiales
-- ✅ **10 commandes** joueurs + admin
-- ✅ **367 KB** plugin compilé
-- ✅ **100% fonctionnel** et testé
+**Système d'événements automatiques** qui s'activent aléatoirement toutes les 30-90 minutes pour dynamiser le gameplay.
 
-### Prochaines étapes (Phase 2)
+#### 10 Types d'événements
 
-1. **Contenu** :
-   - Ajouter 10+ quêtes supplémentaires
-   - Créer des zones de boss custom
-   - Implémenter les skills actifs
+1. **DOUBLE_XP** 🌟 : Double XP pendant 15 minutes (x2)
+2. **DOUBLE_ZINES** 💰 : Double Zines pendant 15 minutes (x2)
+3. **HAPPY_HOUR** 🎉 : Triple XP + Double Zines (15 min)
+4. **BOSS_SPAWN** 👹 : Spawn d'un boss légendaire
+5. **METEOR_SHOWER** ☄️ : Pluie de météores avec loot rare
+6. **TREASURE_HUNT** 💎 : Coffres au trésor cachés
+7. **MOB_APOCALYPSE** 🧟 : Invasion massive de mobs
+8. **MINING_BONUS** ⛏️ : x1.5 drops mining (20 min)
+9. **PVP_EVENT** ⚔️ : Zone PVP avec récompenses
+10. **LOTTERY** 🎰 : Loterie avec prix jusqu'à 1000 Zines
 
-2. **Monétisation** :
-   - Intégrer système de paiement (PayPal/Stripe)
-   - Créer page de vente des classes premium
-   - Système de codes promo
+#### Architecture
 
-3. **Marketing** :
-   - Vidéos YouTube avec Adam
-   - Discord pour la communauté
-   - Site web vitrine
+**Fichiers** :
+- `ServerEvent.java` : Modèle de données des événements (EventType enum, multipliers, metadata)
+- `EventManager.java` : Gestion automatique (scheduler, cooldowns, reminders, multipliers API)
+- `EventCommand.java` : `/event [list|start|stop|info|active]`
+- `EventMultiplierListener.java` : Application automatique des bonus XP/Zines
 
-4. **Amélioration** :
-   - Classements (leaderboards)
-   - Achievements/succès
-   - Events automatiques
+**Fonctionnalités** :
+- ✅ Auto-scheduler : événements toutes les 30-90 minutes
+- ✅ Multi-événements : plusieurs événements simultanés possibles
+- ✅ Cooldowns : 5 minutes entre 2 événements
+- ✅ Reminders : notifications à mi-parcours et 1 min avant la fin
+- ✅ API multipliers : `getCurrentXPMultiplier()`, `getCurrentZinesMultiplier()`
+- ✅ Broadcast : messages colorés dans le chat avec emojis
+- ✅ Admin controls : démarrer/arrêter manuellement
+
+**Commandes** :
+```bash
+/event              # Voir les événements actifs
+/event list         # Liste tous les types d'événements
+/event start <type> # (Admin) Démarrer un événement
+/event stop <type>  # (Admin) Arrêter un événement
+/event info <type>  # Détails d'un type d'événement
+```
+
+**Intégration** :
+- XP système : bonus automatique via `EventMultiplierListener`
+- Économie : bonus Zines lors des drops
+- Boss système : spawn automatique de boss
+- Mining : bonus de drops
 
 ---
 
-**Bon jeu sur ZineCraft !** 🎮⚔️💰
+### 🎯 Combat Skills System - Compétences de Combat
+
+**32 compétences actives** réparties sur 8 classes avec système de mana, cooldowns et effets visuels.
+
+#### Architecture Modulaire
+
+**Fichiers core** :
+- `Skill.java` : Classe abstraite avec enums (SkillType, SkillRarity)
+  - Types : OFFENSIVE, DEFENSIVE, SUPPORT, MOBILITY, UTILITY, ULTIMATE
+  - Raretés : COMMON, UNCOMMON, RARE, EPIC, LEGENDARY
+- `SkillManager.java` : Gestion centrale (mana, cooldowns, validations, registre)
+  - Mana : 100 max, régénération +2/seconde
+  - Cooldowns : Map<UUID, Map<SkillID, ExpirationTime>>
+  - Registry : Map<String, Skill> + Map<ClassType, List<Skill>>
+- `SkillCommand.java` : `/skill [list|use|info|mana]` avec tab completion
+
+**Fichiers d'implémentation** (`impl/` package) :
+- `WarriorSkills.java` : 4 skills Warrior
+- `ArcherSkills.java` : 4 skills Archer
+- `MageSkills.java` : 4 skills Mage
+- `PaladinSkills.java` : 4 skills Paladin
+- `AssassinSkills.java` : 4 skills Assassin
+- `NecromancerSkills.java` : 4 skills Necromancer
+- `DruidSkills.java` : 4 skills Druid
+- `ArchmageSkills.java` : 4 skills Archmage
+
+#### Les 32 Compétences
+
+**WARRIOR (Guerrier)** 🗡️
+1. **Iron Skin** (lvl 5, 20 mana, 30s CD) : Resistance II pendant 10s
+2. **Power Strike** (lvl 10, 25 mana, 15s CD) : Knockback + 8 dégâts AOE
+3. **Battle Cry** (lvl 15, 30 mana, 45s CD) : Buff équipe Strength II + Speed I
+4. **Berserker** (lvl 25, 50 mana, 90s CD) : Rage ultime (Strength III + Speed II + Regen II + Fire Res)
+
+**ARCHER (Archer)** 🏹
+1. **Eagle Eye** (lvl 5, 20 mana, 25s CD) : Précision améliorée pendant 15s
+2. **Multi Shot** (lvl 10, 30 mana, 20s CD) : Tire 5 flèches en éventail
+3. **Evasion** (lvl 15, 25 mana, 30s CD) : Dash arrière + invisibilité 5s
+4. **Arrow Rain** (lvl 25, 50 mana, 60s CD) : Pluie de 30 flèches enflammées
+
+**MAGE (Mage)** 🔮
+1. **Mana Shield** (lvl 5, 25 mana, 35s CD) : Absorption + régénération 10s
+2. **Fireball** (lvl 10, 30 mana, 15s CD) : Boule de feu explosive
+3. **Teleport** (lvl 15, 35 mana, 20s CD) : Téléportation jusqu'à 15 blocs
+4. **Meteor** (lvl 25, 60 mana, 75s CD) : Météore destructeur avec animation
+
+**PALADIN (Paladin)** ⚡
+1. **Holy Aura** (lvl 5, 20 mana, 40s CD) : Régénération + résistance équipe 12s
+2. **Divine Strike** (lvl 10, 25 mana, 25s CD) : Frappe sacrée 10 dégâts + knockback + fire
+3. **Healing Wave** (lvl 15, 35 mana, 35s CD) : Soigne 8 HP + regen équipe (12 blocs)
+4. **Resurrection** (lvl 25, 70 mana, 90s CD) : Résistance IV + Regen III + soins complets 8s
+
+**ASSASSIN (Assassin)** 🗡️
+1. **Shadow Step** (lvl 5, 20 mana, 20s CD) : Invisibilité + Speed II 6s
+2. **Backstab** (lvl 10, 30 mana, 15s CD) : Dash + x3 dégâts dans le dos
+3. **Poison** (lvl 15, 25 mana, 30s CD) : Poison II + Wither + Slowness 12s
+4. **Blade Storm** (lvl 25, 50 mana, 60s CD) : Rotation 5s avec dégâts continus
+
+**NECROMANCER (Necromancer)** 💀
+1. **Summon Skeleton** (lvl 5, 25 mana, 30s CD) : Invoque 2 squelettes armés 60s
+2. **Life Drain** (lvl 10, 30 mana, 20s CD) : Draine 4 HP par ennemi et vous soigne
+3. **Curse** (lvl 15, 35 mana, 35s CD) : Weakness II + Slowness + Blindness + Wither
+4. **Undead Army** (lvl 25, 60 mana, 80s CD) : Invoque 6 zombies + 4 squelettes puissants
+
+**DRUID (Druid)** 🌿
+1. **Nature Heal** (lvl 5, 20 mana, 25s CD) : Soigne 6 HP + Regen II 10s
+2. **Vine Trap** (lvl 10, 25 mana, 20s CD) : Immobilise ennemis 5s (Slowness X)
+3. **Wild Shape** (lvl 15, 30 mana, 35s CD) : Transformation loup (Speed III + Jump II + Strength) 15s
+4. **Force of Nature** (lvl 25, 55 mana, 70s CD) : Dégâts zone + soins + invoque Iron Golem
+
+**ARCHMAGE (Archmage)** 🌟
+1. **Arcane Mastery** (lvl 5, 15 mana, 30s CD) : Regen mana x3 + cooldown -50% 20s
+2. **Time Warp** (lvl 10, 35 mana, 25s CD) : Ralentit ennemis + accélère alliés (12 blocs)
+3. **Elemental Fury** (lvl 15, 45 mana, 50s CD) : Déchaîne 4 éléments (feu, glace, foudre, vent)
+4. **Apocalypse** (lvl 25, 80 mana, 120s CD) : Apocalypse 10s (explosions + météores + foudre)
+
+#### Système de Mana
+
+- **Mana max** : 100 points
+- **Régénération** : +2 points/seconde (auto)
+- **Consommation** : 15-80 mana selon la skill
+- **Affichage** : `/skill mana` avec barre de progression
+
+#### Commandes
+
+```bash
+/skill              # Liste vos skills disponibles
+/skill list         # Alias de la commande principale
+/skill use <id>     # Utiliser une compétence (ex: /skill use warrior_berserker)
+/skill info <id>    # Détails d'une compétence
+/skill mana         # Voir votre mana actuelle
+```
+
+**Aliases** : `/skills`, `/competence`, `/competences`, `/abilities`
+
+#### Validation & Sécurité
+
+- ✅ Vérification niveau requis
+- ✅ Vérification mana disponible
+- ✅ Vérification cooldown actif
+- ✅ Vérification classe du joueur
+- ✅ Messages d'erreur clairs
+- ✅ Tab completion intelligent
+
+#### Effets Visuels
+
+Chaque skill possède :
+- **Particles** : FLAME, EXPLOSION, ENCHANT, SOUL, CLOUD, etc.
+- **Sounds** : Effets sonores immersifs
+- **Messages** : Annonces colorées avec emojis
+- **Animations** : Pour les ultimates (Meteor, Apocalypse, etc.)
+
+---
+
+## 🎉 Conclusion - Mise à jour
+
+Le serveur ZineCraft dispose maintenant d'un système RPG complet et fonctionnel, prêt pour la monétisation via YouTube. Les 6 tâches de la Phase 1 + 2 systèmes de la Phase 2 sont terminés.
+
+### Statistiques finales
+- ✅ **8500+ lignes** de code Java
+- ✅ **7 tables** MySQL
+- ✅ **8 classes** RPG avec 32 compétences actives
+- ✅ **45 items** dans le shop
+- ✅ **3 quêtes** initiales
+- ✅ **10 types d'événements** dynamiques auto-scheduler
+- ✅ **15+ commandes** joueurs + admin
+- ✅ **485 KB** plugin compilé
+- ✅ **100% fonctionnel** et testé
+
+### Prochaines étapes (Phase 3)
+
+1. **Achievement System** :
+   - 50+ succès à débloquer
+   - Récompenses (XP, Zines, items)
+   - Tracking automatique
+   - GUI avec progression
+
+2. **Contenu supplémentaire** :
+   - 10+ quêtes additionnelles
+   - Zones de boss custom
+   - Donjons procéduraux
+
+3. **Monétisation** :
+   - Intégrer système de paiement (PayPal/Stripe)
+   - Page vente classes premium
+   - Système de codes promo
+
+4. **Marketing** :
+   - Vidéos YouTube avec Adam
+   - Discord communauté
+   - Site web vitrine
+
+5. **Améliorations** :
+   - Classements (leaderboards)
+   - Skill hotkeys (touches F)
+   - Events custom supplémentaires
+
+---
+
+**Bon jeu sur ZineCraft !** 🎮⚔️💰✨
 
 *Pour toute question : Contact Otmane*
 

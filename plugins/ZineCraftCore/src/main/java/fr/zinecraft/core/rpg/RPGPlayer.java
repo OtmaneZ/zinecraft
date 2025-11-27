@@ -100,6 +100,13 @@ public class RPGPlayer {
         return classType != null;
     }
     
+    /**
+     * Alias pour getClassType()
+     */
+    public ClassType getPlayerClass() {
+        return classType != null ? classType : ClassType.NONE;
+    }
+    
     public int getLevel() {
         return level;
     }

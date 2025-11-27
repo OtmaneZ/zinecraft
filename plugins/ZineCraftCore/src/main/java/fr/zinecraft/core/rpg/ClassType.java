@@ -7,6 +7,12 @@ package fr.zinecraft.core.rpg;
  */
 public enum ClassType {
     
+    // ==================== Aucune classe ====================
+    
+    NONE("Aucune", "❓",
+        "Pas encore choisi de classe",
+        false, 0),
+    
     // ==================== Classes Gratuites ====================
     
     WARRIOR("Guerrier", "⚔", 

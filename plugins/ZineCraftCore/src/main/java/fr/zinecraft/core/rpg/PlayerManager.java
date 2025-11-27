@@ -286,6 +286,13 @@ public class PlayerManager {
     }
     
     /**
+     * Alias pour getPlayer(UUID)
+     */
+    public RPGPlayer getRPGPlayer(UUID uuid) {
+        return getPlayer(uuid);
+    }
+    
+    /**
      * Sauvegarder tous les joueurs
      */
     public void saveAllPlayers() {

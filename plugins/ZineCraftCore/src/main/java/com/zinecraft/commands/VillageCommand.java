@@ -31,14 +31,13 @@ public class VillageCommand implements CommandExecutor {
         Location center = new Location(player.getWorld(), 0, -60, 0);
 
         player.sendMessage("§a[VillageZone] Génération du village spawn...");
-        player.sendMessage("§7Coordonnées: (0, -60, 0) - Rayon: 50 blocs");
+        player.sendMessage("§7Coordonnées: (0, -60, 0) - Rayon: 75 blocs");
         player.sendMessage("§7Architecture modulaire avec FAWE async");
+        player.sendMessage("§7Structures: Fontaine + Marché + Forge + Auberge + 15 Maisons");
 
-        // Créer et lancer le builder
-        VillageZoneBuilder builder = new VillageZoneBuilder(plugin, player.getWorld(), center, 50);
-        builder.generate();
-
-        player.sendMessage("§a[VillageZone] Génération lancée en arrière-plan!");
+        // Créer et lancer le builder (rayon 75 au lieu de 50)
+        VillageZoneBuilder builder = new VillageZoneBuilder(plugin, player.getWorld(), center, 75);
+        builder.generate();        player.sendMessage("§a[VillageZone] Génération lancée en arrière-plan!");
         player.sendMessage("§7Consultez les logs du serveur pour suivre la progression.");
 
         return true;

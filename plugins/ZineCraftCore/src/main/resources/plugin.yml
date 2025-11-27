@@ -90,6 +90,10 @@ commands:
     description: Gérer vos quêtes
     usage: /quest [list|available|start|info|progress|complete]
     aliases: [quete, quests, q]
+  skill:
+    description: Gérer vos compétences de classe
+    usage: /skill [list|use|info|mana]
+    aliases: [skills, competence, competences, abilities]
   event:
     description: Gérer les événements dynamiques
     usage: /event [start|stop|info|list]
@@ -106,6 +110,10 @@ commands:
     description: Générer automatiquement la Tutorial Island
     usage: /tutorial
     aliases: [gentutorial, buildtutorial, tuto]
+  resetvillage:
+    description: Nettoyer et réinitialiser la zone du village
+    usage: /resetvillage
+    aliases: [cleanvillage, clearvillage, resetzone]
 
 permissions:
   zinecraft.*:

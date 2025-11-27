@@ -45,27 +45,27 @@ public class VillageZoneBuilder {
     }
 
     private void setupStructures() {
-        // Fontaine centrale
-        structures.add(new FountainBuilder(5));
+        // Fontaine centrale (PLUS GRANDE)
+        structures.add(new FountainBuilder(8)); // Rayon 8 au lieu de 5
 
-        // Marché autour de la fontaine
-        structures.add(new MarketBuilder(8));
+        // Marché autour de la fontaine (PLUS DE STANDS)
+        structures.add(new MarketBuilder(12)); // 12 stands au lieu de 8
 
-        // Forge (structure importante)
-        structures.add(new ForgeBuilder(10, 8, 4));
+        // Forge (PLUS GRANDE)
+        structures.add(new ForgeBuilder(15, 12, 5)); // 15x12 au lieu de 10x8
 
-        // Auberge/Taverne (structure importante)
-        structures.add(new InnBuilder(12, 10));
+        // Auberge/Taverne (PLUS GRANDE)
+        structures.add(new InnBuilder(18, 15)); // 18x15 au lieu de 12x10
 
-        // Maisons dispersées (style varié)
+        // Maisons dispersées (PLUS GRANDES et plus variées)
         for (int i = 0; i < 5; i++) {
-            structures.add(new HouseBuilder(HouseBuilder.HouseStyle.WOOD, 6, 6, 3));
+            structures.add(new HouseBuilder(HouseBuilder.HouseStyle.WOOD, 8, 8, 4)); // 8x8 au lieu de 6x6
         }
         for (int i = 0; i < 5; i++) {
-            structures.add(new HouseBuilder(HouseBuilder.HouseStyle.STONE, 7, 7, 4));
+            structures.add(new HouseBuilder(HouseBuilder.HouseStyle.STONE, 10, 10, 5)); // 10x10 au lieu de 7x7
         }
         for (int i = 0; i < 5; i++) {
-            structures.add(new HouseBuilder(HouseBuilder.HouseStyle.BRICK, 8, 8, 4));
+            structures.add(new HouseBuilder(HouseBuilder.HouseStyle.BRICK, 12, 12, 5)); // 12x12 au lieu de 8x8
         }
     }    /**
      * Génère la zone complète de manière asynchrone avec FAWE
@@ -121,39 +121,54 @@ public class VillageZoneBuilder {
     }
 
     private void buildStructures(EditSession session) {
-        // Fontaine au centre (index 0)
+        // 1. FONTAINE AU CENTRE (0, 0) - Rayon 5 blocs
         structures.get(0).build(session, center);
 
-        // Marché autour de la fontaine (index 1)
-        structures.get(1).build(session, center);
+        // 2. MARCHÉ EN CERCLE AUTOUR FONTAINE (Rayon 15 blocs depuis centre)
+        // MarketBuilder place les stands à rayon 12 depuis son centre
+        // Donc on décale le centre du marché pour éviter la fontaine
+        Location marketCenter = center.clone();
+        structures.get(1).build(session, marketCenter);
 
-        // Forge à l'est (index 2)
-        Location forgeLocation = center.clone().add(25, 0, 0);
+        // 3. BÂTIMENTS PRINCIPAUX (bien espacés)
+        // Forge au NORD (distance 40 blocs)
+        Location forgeLocation = center.clone().add(0, 0, -40);
         structures.get(2).build(session, forgeLocation);
 
-        // Auberge/Taverne à l'ouest (index 3)
-        Location innLocation = center.clone().add(-25, 0, 0);
+        // Auberge au SUD (distance 40 blocs)
+        Location innLocation = center.clone().add(0, 0, 40);
         structures.get(3).build(session, innLocation);
 
-        // Maisons dispersées dans le village
+        // 4. MAISONS (bien espacées en grille régulière)
         int index = 4;
-        int houseRadius = 25;
+        int spacing = 15; // 15 blocs entre chaque maison
 
-        // Quadrant Nord-Ouest
+        // Quadrant Nord-Ouest (5 maisons WOOD)
+        int startX = -50;
+        int startZ = -50;
         for (int i = 0; i < 5; i++) {
-            Location loc = center.clone().add(-houseRadius + i * 8, 0, -houseRadius + i * 5);
+            int col = i % 3; // 3 colonnes
+            int row = i / 3; // 2 rangées
+            Location loc = center.clone().add(startX + col * spacing, 0, startZ + row * spacing);
             structures.get(index++).build(session, loc);
         }
 
-        // Quadrant Nord-Est
+        // Quadrant Nord-Est (5 maisons STONE)
+        startX = 20; // Commence après le marché
+        startZ = -50;
         for (int i = 0; i < 5; i++) {
-            Location loc = center.clone().add(houseRadius - i * 8, 0, -houseRadius + i * 5);
+            int col = i % 3;
+            int row = i / 3;
+            Location loc = center.clone().add(startX + col * spacing, 0, startZ + row * spacing);
             structures.get(index++).build(session, loc);
         }
 
-        // Quadrant Sud
+        // Quadrant Sud (5 maisons BRICK)
+        startX = -50;
+        startZ = 20; // Commence après marché/fontaine
         for (int i = 0; i < 5; i++) {
-            Location loc = center.clone().add(-20 + i * 10, 0, houseRadius - 5);
+            int col = i % 5; // 5 colonnes (ligne horizontale)
+            Location loc = center.clone().add(startX + col * spacing, 0, startZ);
             structures.get(index++).build(session, loc);
         }
     }

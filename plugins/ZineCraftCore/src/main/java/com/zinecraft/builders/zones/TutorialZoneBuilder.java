@@ -5,6 +5,7 @@ import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.math.BlockVector3;
 import com.sk89q.worldedit.world.block.BlockTypes;
+import com.zinecraft.builders.structures.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -13,6 +14,12 @@ import org.bukkit.plugin.Plugin;
 /**
  * Orchestrateur pour la zone Tutorial Island
  * Coords: (0, 500) - Niveau 1-5
+ * 
+ * Architecture modulaire:
+ * - SpawnPointBuilder: Beacon + chest spawn
+ * - CombatArenaBuilder: Arène 20x20 avec spawner
+ * - NPCPlatformBuilder: 3 plateformes (Guerrier, Mage, Marchand)
+ * - PortalBuilder: Portail décoratif vers village
  */
 public class TutorialZoneBuilder {
 
@@ -45,20 +52,11 @@ public class TutorialZoneBuilder {
 
                     plugin.getLogger().info("[TutorialIsland] Création de l'île...");
 
-                    // 1. Île circulaire surélevée (Y=70)
+                    // 1. Terrain: Île circulaire surélevée (Y=70)
                     buildIsland(session);
 
-                    // 2. Spawn point avec beacon
-                    buildSpawnPoint(session);
-
-                    // 3. Arène tutoriel combat
-                    buildCombatArena(session);
-
-                    // 4. PNJ tutoriels (armor stands)
-                    buildNPCStands(session);
-
-                    // 5. Portail vers village
-                    buildPortal(session);
+                    // 2. Structures: Utilisation des builders modulaires
+                    buildStructures(session);
 
                     session.flushQueue();
 
@@ -72,13 +70,17 @@ public class TutorialZoneBuilder {
         });
     }
 
+    /**
+     * Construit le terrain de l'île: Cercle de 50 blocs de rayon surélevé à Y=70
+     */
     private void buildIsland(EditSession session) {
         int cx = center.getBlockX();
         int cy = center.getBlockY() + 10; // Surélévation Y=70
         int cz = center.getBlockZ();
-        int radius = size / 2;
+        int radius = size / 2; // 50 blocs de rayon
 
-        // Île circulaire en grass
+        plugin.getLogger().info("[TutorialIsland] Construction du terrain (rayon " + radius + ")...");
+
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
                 double distance = Math.sqrt(x * x + z * z);
@@ -100,99 +102,56 @@ public class TutorialZoneBuilder {
         }
     }
 
-    private void buildSpawnPoint(EditSession session) {
+    /**
+     * Place toutes les structures sur l'île
+     * 
+     * Distances calculées pour éviter chevauchement:
+     * - SpawnPoint: Centre (0, 0) - rayon 3
+     * - CombatArena: EST (25, 0) - rayon 10
+     * - NPCPlatforms: OUEST (-20, 0), NORD (0, -20), NORD-EST (15, -15) - rayon 3 chacun
+     * - Portal: SUD (0, 35) - rayon 3
+     */
+    private void buildStructures(EditSession session) {
         int cx = center.getBlockX();
-        int cy = center.getBlockY() + 10;
+        int cy = center.getBlockY() + 10; // Y=70
         int cz = center.getBlockZ();
 
-        // Beacon coloré
-        session.setBlock(BlockVector3.at(cx, cy + 1, cz), BlockTypes.BEACON);
+        plugin.getLogger().info("[TutorialIsland] Placement des structures...");
 
-        // Base beacon (3x3 gold blocks)
-        for (int x = -1; x <= 1; x++) {
-            for (int z = -1; z <= 1; z++) {
-                session.setBlock(BlockVector3.at(cx + x, cy, cz + z), BlockTypes.GOLD_BLOCK);
-            }
-        }
+        // 1. Spawn Point au centre (0, 0)
+        SpawnPointBuilder spawnBuilder = new SpawnPointBuilder();
+        Location spawnLoc = new Location(world, cx, cy, cz);
+        spawnBuilder.build(session, spawnLoc);
+        plugin.getLogger().info("  - SpawnPoint placé au centre");
 
-        // Panneau bienvenue
-        session.setBlock(BlockVector3.at(cx + 3, cy + 2, cz), BlockTypes.OAK_SIGN);
+        // 2. Arène de combat à l'EST (25, 0) - 25 blocs distance = rayon spawn (3) + rayon arena (10) + marge (12)
+        CombatArenaBuilder arenaBuilder = new CombatArenaBuilder(20, 20);
+        Location arenaLoc = new Location(world, cx + 25, cy, cz);
+        arenaBuilder.build(session, arenaLoc);
+        plugin.getLogger().info("  - CombatArena placée à l'EST (+25, 0)");
 
-        // Coffre starter
-        session.setBlock(BlockVector3.at(cx - 3, cy + 1, cz), BlockTypes.CHEST);
-    }
+        // 3. PNJ Guerrier à l'OUEST (-20, 0)
+        NPCPlatformBuilder guerrierBuilder = new NPCPlatformBuilder("GUERRIER");
+        Location guerrierLoc = new Location(world, cx - 20, cy, cz);
+        guerrierBuilder.build(session, guerrierLoc);
+        plugin.getLogger().info("  - PNJ Guerrier placé à l'OUEST (-20, 0)");
 
-    private void buildCombatArena(EditSession session) {
-        int cx = center.getBlockX() + 20;
-        int cy = center.getBlockY() + 10;
-        int cz = center.getBlockZ();
+        // 4. PNJ Mage au NORD (0, -20)
+        NPCPlatformBuilder mageBuilder = new NPCPlatformBuilder("MAGE");
+        Location mageLoc = new Location(world, cx, cy, cz - 20);
+        mageBuilder.build(session, mageLoc);
+        plugin.getLogger().info("  - PNJ Mage placé au NORD (0, -20)");
 
-        // Arène 20x20 en stone bricks
-        for (int x = -10; x <= 10; x++) {
-            for (int z = -10; z <= 10; z++) {
-                session.setBlock(BlockVector3.at(cx + x, cy, cz + z), BlockTypes.STONE_BRICKS);
-            }
-        }
+        // 5. PNJ Marchand au NORD-EST (15, -15)
+        NPCPlatformBuilder marchandBuilder = new NPCPlatformBuilder("MARCHAND");
+        Location marchandLoc = new Location(world, cx + 15, cy, cz - 15);
+        marchandBuilder.build(session, marchandLoc);
+        plugin.getLogger().info("  - PNJ Marchand placé au NORD-EST (15, -15)");
 
-        // Bordure arena
-        for (int x = -10; x <= 10; x++) {
-            session.setBlock(BlockVector3.at(cx + x, cy + 1, cz - 10), BlockTypes.COBBLESTONE_WALL);
-            session.setBlock(BlockVector3.at(cx + x, cy + 1, cz + 10), BlockTypes.COBBLESTONE_WALL);
-        }
-        for (int z = -10; z <= 10; z++) {
-            session.setBlock(BlockVector3.at(cx - 10, cy + 1, cz + z), BlockTypes.COBBLESTONE_WALL);
-            session.setBlock(BlockVector3.at(cx + 10, cy + 1, cz + z), BlockTypes.COBBLESTONE_WALL);
-        }
-
-        // Spawner zombies (faibles)
-        session.setBlock(BlockVector3.at(cx, cy + 1, cz), BlockTypes.SPAWNER);
-
-        // Panneau instructions
-        session.setBlock(BlockVector3.at(cx, cy + 2, cz - 15), BlockTypes.OAK_SIGN);
-    }
-
-    private void buildNPCStands(EditSession session) {
-        int cx = center.getBlockX();
-        int cy = center.getBlockY() + 10;
-        int cz = center.getBlockZ();
-
-        // PNJ Guerrier (à placer via commande in-game)
-        // Position: -15, cy+1, 0
-        session.setBlock(BlockVector3.at(cx - 15, cy, cz), BlockTypes.STONE_BRICKS);
-
-        // PNJ Mage
-        // Position: 0, cy+1, -15
-        session.setBlock(BlockVector3.at(cx, cy, cz - 15), BlockTypes.STONE_BRICKS);
-
-        // PNJ Marchand
-        // Position: 15, cy+1, 0
-        session.setBlock(BlockVector3.at(cx + 15, cy, cz), BlockTypes.STONE_BRICKS);
-    }
-
-    private void buildPortal(EditSession session) {
-        int cx = center.getBlockX();
-        int cy = center.getBlockY() + 10;
-        int cz = center.getBlockZ() + 30;
-
-        // Portail décoratif (obsidienne)
-        // Cadre 4x5
-        for (int y = 0; y <= 4; y++) {
-            session.setBlock(BlockVector3.at(cx - 2, cy + y, cz), BlockTypes.OBSIDIAN);
-            session.setBlock(BlockVector3.at(cx + 2, cy + y, cz), BlockTypes.OBSIDIAN);
-        }
-        for (int x = -2; x <= 2; x++) {
-            session.setBlock(BlockVector3.at(cx + x, cy, cz), BlockTypes.OBSIDIAN);
-            session.setBlock(BlockVector3.at(cx + x, cy + 4, cz), BlockTypes.OBSIDIAN);
-        }
-
-        // Intérieur portal (purple stained glass)
-        for (int y = 1; y <= 3; y++) {
-            for (int x = -1; x <= 1; x++) {
-                session.setBlock(BlockVector3.at(cx + x, cy + y, cz), BlockTypes.PURPLE_STAINED_GLASS);
-            }
-        }
-
-        // Panneau "Prêt?"
-        session.setBlock(BlockVector3.at(cx, cy + 2, cz - 2), BlockTypes.OAK_SIGN);
+        // 6. Portail au SUD (0, 35) - Sortie vers village
+        PortalBuilder portalBuilder = new PortalBuilder(4, 5);
+        Location portalLoc = new Location(world, cx, cy, cz + 35);
+        portalBuilder.build(session, portalLoc);
+        plugin.getLogger().info("  - Portal placé au SUD (0, 35)");
     }
 }
