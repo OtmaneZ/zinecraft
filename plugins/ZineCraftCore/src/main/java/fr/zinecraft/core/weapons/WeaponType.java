@@ -175,6 +175,36 @@ public enum WeaponType {
         Particle.FLAME,
         Sound.ENTITY_GHAST_SHOOT,
         0xFF6600 // Orange
+    ),
+    
+    ICY_DUCK(
+        "🦆 Canard Glacial",
+        "Invoque un canard de glace qui gèle les ennemis",
+        Material.SNOWBALL,
+        18,
+        new String[]{
+            "§7Effet: §bInvoque un canard gelé",
+            "§7Spécial: §fGèle la cible",
+            "§7Cooldown: §a5 secondes"
+        },
+        Particle.SNOWFLAKE,
+        Sound.ENTITY_CHICKEN_AMBIENT,
+        0x00BFFF // Bleu ciel
+    ),
+    
+    FLY_FLY(
+        "🪶 Vole Vole",
+        "Fait voler les ennemis dans les airs",
+        Material.FEATHER,
+        10,
+        new String[]{
+            "§7Effet: §eFait voler la cible",
+            "§7Spécial: §b5 blocs/sec pendant 5 sec",
+            "§7Cooldown: §a6 secondes"
+        },
+        Particle.CLOUD,
+        Sound.ENTITY_BAT_TAKEOFF,
+        0xFFFFFF // Blanc
     );
     
     private final String displayName;

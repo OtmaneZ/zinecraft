@@ -101,6 +101,8 @@ public class WeaponCommand implements CommandExecutor {
         
         player.sendMessage(ChatColor.YELLOW + "" + ChatColor.BOLD + "🔥 SPÉCIALES:");
         player.sendMessage(ChatColor.GRAY + "  /weapon give adamledams " + ChatColor.WHITE + "- 🔥 Boule de Feu");
+        player.sendMessage(ChatColor.GRAY + "  /weapon give canard " + ChatColor.WHITE + "- 🦆 Canard Glacial");
+        player.sendMessage(ChatColor.GRAY + "  /weapon give vole " + ChatColor.WHITE + "- 🪶 Vole Vole");
         player.sendMessage("");
         
         player.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + "═════════════════════════════");
@@ -156,6 +158,18 @@ public class WeaponCommand implements CommandExecutor {
             case "bouldefeu":
             case "fireball":
                 type = WeaponType.FIREBALL;
+                break;
+            case "canard":
+            case "canardglacial":
+            case "duck":
+            case "icyduck":
+                type = WeaponType.ICY_DUCK;
+                break;
+            case "vole":
+            case "volevole":
+            case "fly":
+            case "flyfly":
+                type = WeaponType.FLY_FLY;
                 break;
             default:
                 player.sendMessage(ChatColor.RED + "Arme inconnue! Utilise /weapon list");
