@@ -12,6 +12,7 @@ import fr.zinecraft.core.listeners.RPGPlayerListener;
 import fr.zinecraft.core.listeners.NPCListener;
 import fr.zinecraft.core.listeners.ShopListener;
 import fr.zinecraft.core.listeners.QuestListener;
+import fr.zinecraft.core.listeners.EventMultiplierListener;
 import fr.zinecraft.core.commands.CombatCommand;
 import fr.zinecraft.core.commands.Combat1v1Command;
 import fr.zinecraft.core.commands.Combat2v2Command;
@@ -32,6 +33,7 @@ import fr.zinecraft.core.commands.PayCommand;
 import fr.zinecraft.core.commands.EconomyCommand;
 import fr.zinecraft.core.commands.ShopCommand;
 import com.zinecraft.commands.VillageCommand;
+import com.zinecraft.commands.TutorialCommand;
 import fr.zinecraft.core.commands.QuestCommand;
 import fr.zinecraft.core.arena.ArenaManager;
 import fr.zinecraft.core.economy.EconomyManager;
@@ -289,9 +291,10 @@ public class ZineCraftCore extends JavaPlugin {
         getCommand("economy").setExecutor(new EconomyCommand(this));
         getCommand("shop").setExecutor(new ShopCommand(this));
         getCommand("quest").setExecutor(new QuestCommand(this));
-        getCommand("event").setExecutor(new EventCommand());
+        getCommand("event").setExecutor(new EventCommand(this));
         getCommand("effect").setExecutor(new EffectCommand());
         getCommand("village").setExecutor(new VillageCommand(this));
+        getCommand("tutorial").setExecutor(new TutorialCommand(this));
     }
 
     /**
@@ -310,6 +313,7 @@ public class ZineCraftCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new XPListener(levelManager), this);
         getServer().getPluginManager().registerEvents(new ShopListener(this), this);
         getServer().getPluginManager().registerEvents(new QuestListener(this), this);
+        getServer().getPluginManager().registerEvents(new EventMultiplierListener(this), this);
     }
 
     /**

@@ -1,1 +1,1 @@
-allumer le serveur : docker compose -f /root/projects/zinecraft/docker/docker-compose.yml restart papermc
+docker compose -f /root/projects/zinecraft/docker/docker-compose.yml restart papermc

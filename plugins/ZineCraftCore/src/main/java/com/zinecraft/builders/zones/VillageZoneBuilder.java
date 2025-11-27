@@ -10,6 +10,8 @@ import com.zinecraft.builders.core.StructureBuilder;
 import com.zinecraft.builders.structures.FountainBuilder;
 import com.zinecraft.builders.structures.HouseBuilder;
 import com.zinecraft.builders.structures.MarketBuilder;
+import com.zinecraft.builders.structures.ForgeBuilder;
+import com.zinecraft.builders.structures.InnBuilder;
 import com.zinecraft.builders.terrain.TerrainBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -49,6 +51,12 @@ public class VillageZoneBuilder {
         // Marché autour de la fontaine
         structures.add(new MarketBuilder(8));
 
+        // Forge (structure importante)
+        structures.add(new ForgeBuilder(10, 8, 4));
+
+        // Auberge/Taverne (structure importante)
+        structures.add(new InnBuilder(12, 10));
+
         // Maisons dispersées (style varié)
         for (int i = 0; i < 5; i++) {
             structures.add(new HouseBuilder(HouseBuilder.HouseStyle.WOOD, 6, 6, 3));
@@ -59,9 +67,7 @@ public class VillageZoneBuilder {
         for (int i = 0; i < 5; i++) {
             structures.add(new HouseBuilder(HouseBuilder.HouseStyle.BRICK, 8, 8, 4));
         }
-    }
-
-    /**
+    }    /**
      * Génère la zone complète de manière asynchrone avec FAWE
      */
     public void generate() {
@@ -121,8 +127,16 @@ public class VillageZoneBuilder {
         // Marché autour de la fontaine (index 1)
         structures.get(1).build(session, center);
 
+        // Forge à l'est (index 2)
+        Location forgeLocation = center.clone().add(25, 0, 0);
+        structures.get(2).build(session, forgeLocation);
+
+        // Auberge/Taverne à l'ouest (index 3)
+        Location innLocation = center.clone().add(-25, 0, 0);
+        structures.get(3).build(session, innLocation);
+
         // Maisons dispersées dans le village
-        int index = 2;
+        int index = 4;
         int houseRadius = 25;
 
         // Quadrant Nord-Ouest

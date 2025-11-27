@@ -102,6 +102,10 @@ commands:
     description: Générer automatiquement le Village Spawn
     usage: /village
     aliases: [genvillage, buildvillage]
+  tutorial:
+    description: Générer automatiquement la Tutorial Island
+    usage: /tutorial
+    aliases: [gentutorial, buildtutorial, tuto]
 
 permissions:
   zinecraft.*:
