@@ -14,7 +14,7 @@ import org.bukkit.plugin.Plugin;
 /**
  * Orchestrateur pour la zone Tutorial Island
  * Coords: (0, 500) - Niveau 1-5
- * 
+ *
  * Architecture modulaire:
  * - SpawnPointBuilder: Beacon + chest spawn
  * - CombatArenaBuilder: Arène 20x20 avec spawner
@@ -104,7 +104,7 @@ public class TutorialZoneBuilder {
 
     /**
      * Place toutes les structures sur l'île
-     * 
+     *
      * Distances calculées pour éviter chevauchement:
      * - SpawnPoint: Centre (0, 0) - rayon 3
      * - CombatArena: EST (25, 0) - rayon 10
