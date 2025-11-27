@@ -10,7 +10,7 @@ import org.bukkit.Location;
  * Gère le terraforming et l'aplanissement des zones
  */
 public class TerrainBuilder {
-    
+
     /**
      * Aplanit le terrain dans un rayon donné (async avec FAWE)
      */
@@ -25,9 +25,9 @@ public class TerrainBuilder {
             groundLevel + 20,
             center.getBlockZ() + radius
         );
-        
+
         CuboidRegion region = new CuboidRegion(pos1, pos2);
-        
+
         // Remplir le sol avec de l'herbe
         for (int x = pos1.getX(); x <= pos2.getX(); x++) {
             for (int z = pos1.getZ(); z <= pos2.getZ(); z++) {
@@ -44,7 +44,7 @@ public class TerrainBuilder {
             }
         }
     }
-    
+
     /**
      * Crée un chemin entre deux points
      */
@@ -54,7 +54,7 @@ public class TerrainBuilder {
         int x2 = end.getBlockX();
         int z2 = end.getBlockZ();
         int y = start.getBlockY();
-        
+
         // Chemin horizontal
         if (Math.abs(x2 - x1) > Math.abs(z2 - z1)) {
             for (int x = Math.min(x1, x2); x <= Math.max(x1, x2); x++) {

@@ -10,20 +10,20 @@ import org.bukkit.Location;
  * Builder pour générer une fontaine décorative
  */
 public class FountainBuilder extends AbstractStructureBuilder {
-    
+
     private final int radius;
-    
+
     public FountainBuilder(int radius) {
         super("Fountain", radius + 2);
         this.radius = radius;
     }
-    
+
     @Override
     public void build(EditSession session, Location center) {
         int cx = center.getBlockX();
         int cy = center.getBlockY();
         int cz = center.getBlockZ();
-        
+
         // 1. Bassin circulaire en quartz
         for (int x = -radius; x <= radius; x++) {
             for (int z = -radius; z <= radius; z++) {
@@ -41,15 +41,15 @@ public class FountainBuilder extends AbstractStructureBuilder {
                 }
             }
         }
-        
+
         // 2. Pilier central en quartz
         for (int dy = 0; dy <= 3; dy++) {
             session.setBlock(BlockVector3.at(cx, cy + dy, cz), BlockTypes.QUARTZ_PILLAR);
         }
-        
+
         // 3. Lanterne au sommet
         session.setBlock(BlockVector3.at(cx, cy + 4, cz), BlockTypes.SEA_LANTERN);
-        
+
         // 4. Petits jets d'eau (optionnel)
         session.setBlock(BlockVector3.at(cx, cy + 2, cz), BlockTypes.WATER);
     }

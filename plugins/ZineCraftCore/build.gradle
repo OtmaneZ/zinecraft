@@ -22,6 +22,12 @@ repositories {
         url = 'https://repo.papermc.io/repository/maven-public/'
     }
 
+    // WorldEdit/FastAsyncWorldEdit
+    maven {
+        name = 'enginehub'
+        url = 'https://maven.enginehub.org/repo/'
+    }
+
     // Autres repos utiles
     maven {
         name = 'sonatype'
@@ -33,10 +39,14 @@ dependencies {
     // Paper API
     compileOnly 'io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT'
 
-    // MySQL Driver
-    implementation 'mysql:mysql-connector-java:8.0.33'
+    // WorldEdit/FastAsyncWorldEdit API
+    compileOnly('com.fastasyncworldedit:FastAsyncWorldEdit-Core:2.11.2')
+    compileOnly('com.fastasyncworldedit:FastAsyncWorldEdit-Bukkit:2.11.2') {
+        transitive = false
+    }
 
-    // HikariCP (Connection Pool)
+    // MySQL Driver
+    implementation 'mysql:mysql-connector-java:8.0.33'    // HikariCP (Connection Pool)
     implementation 'com.zaxxer:HikariCP:5.0.1'
 
     // Lombok (optionnel, pour code plus propre)

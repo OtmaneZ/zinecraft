@@ -11,32 +11,32 @@ import org.bukkit.Location;
  * Classe abstraite facilitant l'implémentation des builders
  */
 public abstract class AbstractStructureBuilder implements StructureBuilder {
-    
+
     protected final String name;
     protected final int radius;
-    
+
     protected AbstractStructureBuilder(String name, int radius) {
         this.name = name;
         this.radius = radius;
     }
-    
+
     @Override
     public String getName() {
         return name;
     }
-    
+
     @Override
     public int getRadius() {
         return radius;
     }
-    
+
     /**
      * Place un bloc via FAWE EditSession (async)
      */
     protected void setBlock(EditSession session, int x, int y, int z, BlockType type) {
         session.setBlock(BlockVector3.at(x, y, z), type);
     }
-    
+
     /**
      * Remplit une zone cubique
      */
@@ -49,7 +49,7 @@ public abstract class AbstractStructureBuilder implements StructureBuilder {
             }
         }
     }
-    
+
     /**
      * Convertit Location Bukkit vers coordonnées relatives au centre
      */

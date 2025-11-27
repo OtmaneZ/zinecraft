@@ -9,16 +9,17 @@
 
 ## 📊 État Actuel du Projet
 
-**Dernière mise à jour** : 26 novembre 2025
-**Phase actuelle** : 🎮 Développement Features Custom
+**Dernière mise à jour** : 27 novembre 2025
+**Phase actuelle** : 🎮 Phase 1 RPG Complète + Système de Construction
 
 ```
-██████████░░░░░░░░░░ 50% Complete (Core Features OK)
+████████████████░░░░ 80% Complete (Core RPG + Building System)
 ```
 
 **🎮 Serveur** : `91.99.237.55:25565` (Minecraft Java 1.21)
 **👤 Développeur** : Otmane + Copilot
 **💰 Budget utilisé** : 0€ (tout codé maison)
+**📊 Code** : 5000+ lignes Java | Plugin : 367 KB
 
 ## 🎯 Vision du Projet
 
@@ -143,17 +144,32 @@ Approche optimisée : **coder soi-même** + acheter uniquement les assets critiq
 
 ### Plugins Custom (Codés maison)
 
-- **ZineCraftCore** - Plugin principal custom
-  - **ArenaManager** - Combat PvP 1v1/2v2
-  - **BossManager** - 6 boss customs (Titan, Dragon, Démon, Golem, Phénix, Kraken)
-  - **ParkourManager** - Parkours avec récompenses
-  - **PetManager** - 8 types de familiers évolutifs (Wolf, Dragon, Eagle, Golem, Phoenix, Unicorn, Spider, Turtle)
-  - **WeaponManager** - 10 armes légendaires avec pouvoirs (Excalibur, Fire Blade, Thor Hammer, etc.)
-  - **PowerManager** - 12 super-pouvoirs (Speed, Flight, Tornado, Lightning, Shield, etc.)
-  - **ScaryZoneCommand** - Zones effrayantes avec orage et ambiance terrifiante
-  - **BuildCommand** - Construction de structures (château, tour, maison, pyramide)
-  - Système d'économie & argent virtuel
-  - Grades VIP avec permissions custom
+- **ZineCraftCore** - Plugin principal custom (367 KB)
+  - **Système RPG Complet** ⭐ (Phase 1 - **TERMINÉE**)
+    - **PlayerManager** - Gestion joueurs avec MySQL (7 tables)
+    - **ClassManager** - 8 classes RPG (3 gratuites, 5 premium)
+    - **LevelManager** - XP multi-sources avec multiplicateurs de classe
+    - **EconomyManager** - Monnaie Zines avec transactions P2P
+    - **ShopManager** - 45 items en 8 catégories
+    - **QuestManager** - 3 quêtes initiales avec auto-progression
+    - **NPCManager** - NPC "Maître des Classes" avec GUI
+  - **Système de Construction** 🏗️ (**NOUVEAU**)
+    - **VillageZoneBuilder** - Générateur de villages modulaire avec FAWE async
+    - **StructureBuilder** - Interface pour structures personnalisées
+    - **TerrainBuilder** - Terraforming et aplanissement automatique
+    - **FountainBuilder** - Fontaines décoratives
+    - **HouseBuilder** - Maisons (Wood, Stone, Brick)
+    - **MarketBuilder** - Marchés avec stands colorés
+  - **Systèmes de Combat**
+    - **ArenaManager** - Combat PvP 1v1/2v2
+    - **BossManager** - 6 boss customs (Titan, Dragon, Démon, Golem, Phénix, Kraken)
+    - **WeaponManager** - 10 armes légendaires avec pouvoirs
+  - **Systèmes de Gameplay**
+    - **ParkourManager** - Parkours avec récompenses
+    - **PetManager** - 8 types de familiers évolutifs
+    - **PowerManager** - 12 super-pouvoirs
+    - **EventManager** - Événements automatiques
+    - **VisualEffectManager** - Effets visuels et particules
 - **Plugins communautaires** (support)
   - Vault - API économie
   - LuckPerms - Gestion permissions
@@ -171,20 +187,58 @@ Approche optimisée : **coder soi-même** + acheter uniquement les assets critiq
 ```
 zinecraft/
 ├── server/                  # Serveur PaperMC
-│   ├── plugins/            # Plugins compilés
+│   ├── plugins/            # Plugins compilés (367 KB)
 │   ├── world/              # Monde principal
 │   └── config/             # Configurations serveur
 ├── plugins/                # Code source des plugins
 │   └── ZineCraftCore/      # Plugin principal (Java)
-│       ├── src/main/java/fr/zinecraft/core/
-│       │   ├── commands/   # Commandes (/boss, /pet, /weapon, /power, /scary)
-│       │   ├── listeners/  # Event listeners
-│       │   ├── boss/       # Système de boss
-│       │   ├── pets/       # Système de familiers
-│       │   ├── weapons/    # Système d'armes
-│       │   ├── powers/     # Système de pouvoirs
-│       │   ├── arena/      # Système d'arènes PvP
-│       │   └── parkour/    # Système de parkour
+│       ├── src/main/java/
+│       │   ├── fr/zinecraft/core/
+│       │   │   ├── commands/      # Commandes RPG & Features
+│       │   │   │   ├── ClassCommand.java, StatsCommand.java
+│       │   │   │   ├── BalanceCommand.java, PayCommand.java, ShopCommand.java
+│       │   │   │   ├── QuestCommand.java, EconomyCommand.java
+│       │   │   │   ├── BossCommand.java, PetCommand.java, WeaponCommand.java
+│       │   │   │   └── PowerCommand.java, BuildCommand.java, EventCommand.java
+│       │   │   ├── listeners/     # Event listeners
+│       │   │   │   ├── RPGPlayerListener.java, NPCListener.java
+│       │   │   │   ├── XPListener.java, ShopListener.java, QuestListener.java
+│       │   │   │   └── BossListener.java, WeaponListener.java
+│       │   │   ├── rpg/           # Système RPG Phase 1
+│       │   │   │   ├── RPGPlayer.java, PlayerManager.java
+│       │   │   │   ├── ClassType.java, ClassManager.java
+│       │   │   │   ├── Skill.java, NPCManager.java
+│       │   │   │   └── LevelManager.java
+│       │   │   ├── economy/       # Système économique
+│       │   │   │   ├── EconomyManager.java
+│       │   │   │   └── ShopManager.java
+│       │   │   ├── quests/        # Système de quêtes
+│       │   │   │   ├── Quest.java, QuestObjective.java
+│       │   │   │   ├── PlayerQuestProgress.java
+│       │   │   │   └── QuestManager.java
+│       │   │   ├── boss/          # Système de boss
+│       │   │   ├── pets/          # Système de familiers
+│       │   │   ├── weapons/       # Système d'armes
+│       │   │   ├── powers/        # Système de pouvoirs
+│       │   │   ├── arena/         # Système d'arènes PvP
+│       │   │   ├── parkour/       # Système de parkour
+│       │   │   ├── events/        # Événements automatiques
+│       │   │   └── visuals/       # Effets visuels
+│       │   └── com/zinecraft/
+│       │       ├── commands/      # Commandes de construction
+│       │       │   └── VillageCommand.java
+│       │       └── builders/      # Système de construction modulaire
+│       │           ├── core/      # Interfaces & classes abstraites
+│       │           │   ├── StructureBuilder.java
+│       │           │   └── AbstractStructureBuilder.java
+│       │           ├── structures/ # Builders de structures
+│       │           │   ├── FountainBuilder.java
+│       │           │   ├── HouseBuilder.java
+│       │           │   └── MarketBuilder.java
+│       │           ├── terrain/   # Terraforming
+│       │           │   └── TerrainBuilder.java
+│       │           └── zones/     # Zones complètes
+│       │               └── VillageZoneBuilder.java
 │       └── build.gradle    # Configuration Gradle
 ├── management-scripts/     # Scripts de gestion RCON
 │   ├── boss-manager.sh     # Gestion des boss
@@ -352,20 +406,51 @@ mc "commande"
 | 🏗️ Infrastructure | ✅ Complet | 100% ████████████ |
 | 🎮 Serveur opérationnel | ✅ OK | 100% ████████████ |
 | 🔌 Plugin ZineCraftCore | ✅ Développé | 100% ████████████ |
-| 👾 Boss System | ✅ Complet | 100% ████████████ |
-| 🐾 Pet System | ✅ Complet | 100% ████████████ |
-| ⚔️ Weapon System | ✅ Complet | 100% ████████████ |
-| ⚡ Power System | ✅ Complet | 100% ████████████ |
-| 🏗️ Build System | ✅ Complet | 100% ████████████ |
-| 👻 Scary Zone | ✅ Complet | 100% ████████████ |
-| 🎨 Design & Map | ⏳ À faire | 0% ░░░░░░░░░░░░ |
-| 🪙 Économie & Jobs | ⏳ À faire | 0% ░░░░░░░░░░░░ |
-| 📜 Quêtes | ⏳ À faire | 0% ░░░░░░░░░░░░ |
+| **📊 Système RPG Phase 1** | ✅ **TERMINÉ** | **100%** ████████████ |
+| ├─ 💾 Base de données MySQL | ✅ 7 tables | 100% ████████████ |
+| ├─ ⚔️ Classes & Skills | ✅ 8 classes, 32 skills | 100% ████████████ |
+| ├─ ⭐ XP & Leveling | ✅ 4 sources XP | 100% ████████████ |
+| ├─ 💰 Économie (Zines) | ✅ Transactions P2P | 100% ████████████ |
+| ├─ 🛒 Shop | ✅ 45 items | 100% ████████████ |
+| └─ 📜 Quêtes | ✅ 3 quêtes initiales | 100% ████████████ |
+| **🏗️ Système de Construction** | ✅ **NOUVEAU** | **100%** ████████████ |
+| ├─ 🏘️ Village Generator | ✅ Modulaire FAWE | 100% ████████████ |
+| ├─ 🏠 Structures | ✅ 3 types | 100% ████████████ |
+| └─ 🌍 Terraforming | ✅ Async | 100% ████████████ |
+| 👾 Boss System | ✅ 6 boss | 100% ████████████ |
+| 🐾 Pet System | ✅ 8 types | 100% ████████████ |
+| ⚔️ Weapon System | ✅ 10 armes | 100% ████████████ |
+| ⚡ Power System | ✅ 12 pouvoirs | 100% ████████████ |
+| 🎨 Design & Map | 🚧 En cours | 20% ██░░░░░░░░░░ |
 | 🪙 Monétisation (Tebex) | ⏳ À faire | 0% ░░░░░░░░░░░░ |
 | 📱 Marketing | ⏳ À faire | 0% ░░░░░░░░░░░░ |
-| **GLOBAL** | 🚀 Features custom | **50%** ██████░░░░░░ |
+| **GLOBAL** | 🚀 Phase RPG OK | **80%** ████████████░░░░ |
 
 ## ✅ Changelog Important
+
+**27 novembre 2025** - Phase 1 RPG Complète + Système de Construction
+
+- ✅ **Système RPG Phase 1 TERMINÉ** (6 tâches complètes)
+  - 💾 Base de données MySQL : 7 tables opérationnelles
+  - ⚔️ 8 Classes RPG : 3 gratuites, 5 premium (15€/30€/60€)
+  - 🎯 32 Compétences : 4 par classe
+  - ⭐ Système d'XP : 4 sources avec multiplicateurs de classe (x1 à x3)
+  - 💰 Économie Zines : Transactions P2P, daily rewards
+  - 🛒 Shop : 45 items en 8 catégories
+  - 📜 Quêtes : 3 quêtes initiales avec auto-progression
+  - 👤 NPC "Maître des Classes" avec GUI de sélection
+  - 📊 Commandes : /class, /stats, /balance, /pay, /shop, /quest, /economy
+  - 📖 Documentation complète : RPG_SYSTEMS.md (1039 lignes)
+- ✅ **Système de Construction Modulaire** (NOUVEAU)
+  - 🏘️ VillageZoneBuilder : Générateur de villages complets avec FAWE async
+  - 🏗️ Architecture modulaire : StructureBuilder, AbstractStructureBuilder
+  - 🏠 Structures disponibles : Fountains, Houses (3 styles), Markets
+  - 🌍 TerrainBuilder : Terraforming et aplanissement automatique
+  - 🛤️ Génération de routes et chemins
+  - 🎨 Commande /village pour spawn de villages
+- 🎯 **367 KB** de plugin compilé
+- 📝 **5000+ lignes** de code Java
+- 💾 **Commit GitHub** : f858fea, 69a41c4 (Phase 1 complète)
 
 **26 novembre 2025** - Features Custom Complètes
 
@@ -387,10 +472,20 @@ mc "commande"
 
 ## 📝 Documentation
 
+- **[RPG Systems - Documentation complète](./docs/RPG_SYSTEMS.md)** ⭐ NOUVEAU (1039 lignes)
+  - Vue d'ensemble des 6 tâches Phase 1
+  - Base de données MySQL (7 tables)
+  - Système de classes (8 classes, 32 skills)
+  - Système d'XP et leveling
+  - Système économique (Zines, Shop)
+  - Système de quêtes
+  - Guide pour les joueurs (Adam 11 ans)
+  - Configuration serveur et déploiement
 - [Architecture](./docs/ARCHITECTURE.md)
-- [Guide de développement](./docs/DEVELOPMENT.md)
-- [API des plugins](./docs/API.md)
-- [Déploiement](./docs/DEPLOYMENT.md)
+- [Guide Features Custom](./docs/GUIDE_FEATURES.md)
+- [Guide de développement](./docs/DEVELOPMENT.md) (si existe)
+- [API des plugins](./docs/API.md) (si existe)
+- [Déploiement](./docs/DEPLOYMENT.md) (si existe)
 
 ## 🪙 Monétisation
 

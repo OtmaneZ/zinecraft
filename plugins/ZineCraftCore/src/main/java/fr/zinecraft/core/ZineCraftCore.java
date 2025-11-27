@@ -31,7 +31,7 @@ import fr.zinecraft.core.commands.BalanceCommand;
 import fr.zinecraft.core.commands.PayCommand;
 import fr.zinecraft.core.commands.EconomyCommand;
 import fr.zinecraft.core.commands.ShopCommand;
-import fr.zinecraft.core.builders.VillageBuilder;
+import com.zinecraft.commands.VillageCommand;
 import fr.zinecraft.core.commands.QuestCommand;
 import fr.zinecraft.core.arena.ArenaManager;
 import fr.zinecraft.core.economy.EconomyManager;
@@ -291,7 +291,7 @@ public class ZineCraftCore extends JavaPlugin {
         getCommand("quest").setExecutor(new QuestCommand(this));
         getCommand("event").setExecutor(new EventCommand());
         getCommand("effect").setExecutor(new EffectCommand());
-        getCommand("village").setExecutor(new VillageBuilder());
+        getCommand("village").setExecutor(new VillageCommand(this));
     }
 
     /**
