@@ -55,8 +55,10 @@ public class VillageWallBuilder {
      * Construire un mur circulaire en bois
      */
     private void buildCircularWall(World world, int cx, int cz, int groundY, int radius) {
-        // Parcourir le cercle
-        for (double angle = 0; angle < 360; angle += 2) {
+        // Parcourir le cercle avec un angle plus fin pour éviter les trous
+        double angleStep = 360.0 / (2 * Math.PI * radius); // 1 bloc par pas environ
+        
+        for (double angle = 0; angle < 360; angle += angleStep) {
             double radians = Math.toRadians(angle);
             int x = (int) (cx + radius * Math.cos(radians));
             int z = (int) (cz + radius * Math.sin(radians));
@@ -76,8 +78,8 @@ public class VillageWallBuilder {
                 world.getBlockAt(innerX, y + dy, innerZ).setType(Material.OAK_PLANKS);
             }
             
-            // Poutres verticales tous les 5 blocs
-            if ((int)angle % 10 == 0) {
+            // Poutres verticales régulièrement espacées
+            if ((int)(angle / angleStep) % 10 == 0) {
                 for (int dy = 0; dy < WALL_HEIGHT; dy++) {
                     world.getBlockAt(x, y + dy, z).setType(Material.DARK_OAK_LOG);
                 }
@@ -203,8 +205,10 @@ public class VillageWallBuilder {
      * Ajouter des créneaux sur le haut du mur
      */
     private void buildBattlements(World world, int cx, int cz, int groundY, int radius) {
-        // Parcourir le cercle
-        for (double angle = 0; angle < 360; angle += 4) {
+        // Parcourir le cercle avec le même pas que le mur
+        double angleStep = 360.0 / (2 * Math.PI * radius);
+        
+        for (double angle = 0; angle < 360; angle += angleStep * 2) { // Un créneau tous les 2 blocs
             double radians = Math.toRadians(angle);
             int x = (int) (cx + radius * Math.cos(radians));
             int z = (int) (cz + radius * Math.sin(radians));
@@ -213,7 +217,7 @@ public class VillageWallBuilder {
             int y = findGroundLevel(world, x, groundY, z);
             
             // Créneaux alternés (un bloc tous les 2)
-            if ((int)angle % 8 == 0) {
+            if ((int)(angle / angleStep) % 2 == 0) {
                 world.getBlockAt(x, y + WALL_HEIGHT, z).setType(Material.DARK_OAK_FENCE);
                 world.getBlockAt(x, y + WALL_HEIGHT + 1, z).setType(Material.DARK_OAK_FENCE);
             }

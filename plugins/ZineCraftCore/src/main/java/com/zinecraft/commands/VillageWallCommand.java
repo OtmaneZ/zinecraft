@@ -21,8 +21,9 @@ public class VillageWallCommand implements CommandExecutor {
     
     // Coordonnées du village (à ajuster selon votre village)
     private static final int VILLAGE_CENTER_X = 0;
+    private static final int VILLAGE_CENTER_Y = -60;
     private static final int VILLAGE_CENTER_Z = 0;
-    private static final int VILLAGE_RADIUS = 50;
+    private static final int VILLAGE_RADIUS = 100;
     
     public VillageWallCommand(Plugin plugin) {
         this.plugin = plugin;
@@ -58,7 +59,7 @@ public class VillageWallCommand implements CommandExecutor {
         }
         
         String subCommand = args[0].toLowerCase();
-        Location center = new Location(player.getWorld(), VILLAGE_CENTER_X, 65, VILLAGE_CENTER_Z);
+        Location center = new Location(player.getWorld(), VILLAGE_CENTER_X, VILLAGE_CENTER_Y, VILLAGE_CENTER_Z);
         
         switch (subCommand) {
             case "build":
@@ -67,25 +68,20 @@ public class VillageWallCommand implements CommandExecutor {
                 player.sendMessage("§e[VillageWall] Construction des fortifications médiévales...");
                 player.sendMessage("§7Centre : X=" + VILLAGE_CENTER_X + " Z=" + VILLAGE_CENTER_Z);
                 player.sendMessage("§7Rayon : " + VILLAGE_RADIUS + " blocs");
-                player.sendMessage("§c⚠ Cette opération peut prendre 30-60 secondes...");
+                player.sendMessage("§c⚠ Cette opération peut prendre quelques secondes...");
                 
-                // Lancer la construction de manière asynchrone
-                plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+                // Lancer la construction sur le thread principal
+                plugin.getServer().getScheduler().runTask(plugin, () -> {
                     try {
                         wallBuilder.buildVillageWalls(center, VILLAGE_RADIUS);
-                        
-                        plugin.getServer().getScheduler().runTask(plugin, () -> {
-                            player.sendMessage("§a[VillageWall] ✔ Fortifications terminées !");
-                            player.sendMessage("§7- Mur circulaire en bois");
-                            player.sendMessage("§7- 4 tours d'angle");
-                            player.sendMessage("§7- 4 portes (Nord, Sud, Est, Ouest)");
-                            player.sendMessage("§7- Créneaux défensifs");
-                        });
+                        player.sendMessage("§a[VillageWall] ✔ Fortifications terminées !");
+                        player.sendMessage("§7- Mur circulaire en bois");
+                        player.sendMessage("§7- 4 tours d'angle");
+                        player.sendMessage("§7- 4 portes (Nord, Sud, Est, Ouest)");
+                        player.sendMessage("§7- Créneaux défensifs");
                     } catch (Exception e) {
-                        plugin.getServer().getScheduler().runTask(plugin, () -> {
-                            player.sendMessage("§c[VillageWall] ✘ Erreur lors de la construction !");
-                            player.sendMessage("§c" + e.getMessage());
-                        });
+                        player.sendMessage("§c[VillageWall] ✘ Erreur lors de la construction !");
+                        player.sendMessage("§c" + e.getMessage());
                     }
                 });
                 break;
@@ -95,17 +91,12 @@ public class VillageWallCommand implements CommandExecutor {
             case "clear":
                 player.sendMessage("§e[VillageWall] Suppression des fortifications...");
                 
-                plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+                plugin.getServer().getScheduler().runTask(plugin, () -> {
                     try {
                         wallBuilder.removeVillageWalls(center, VILLAGE_RADIUS);
-                        
-                        plugin.getServer().getScheduler().runTask(plugin, () -> {
-                            player.sendMessage("§a[VillageWall] ✔ Fortifications supprimées !");
-                        });
+                        player.sendMessage("§a[VillageWall] ✔ Fortifications supprimées !");
                     } catch (Exception e) {
-                        plugin.getServer().getScheduler().runTask(plugin, () -> {
-                            player.sendMessage("§c[VillageWall] ✘ Erreur lors de la suppression !");
-                        });
+                        player.sendMessage("§c[VillageWall] ✘ Erreur lors de la suppression !");
                     }
                 });
                 break;
