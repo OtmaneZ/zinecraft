@@ -14,6 +14,7 @@ import fr.zinecraft.core.listeners.ShopListener;
 import fr.zinecraft.core.listeners.QuestListener;
 import fr.zinecraft.core.listeners.EventMultiplierListener;
 import fr.zinecraft.core.listeners.PortalListener;
+import fr.zinecraft.core.listeners.DesertZoneListener;
 import fr.zinecraft.core.commands.CombatCommand;
 import fr.zinecraft.core.commands.Combat1v1Command;
 import fr.zinecraft.core.commands.Combat2v2Command;
@@ -36,13 +37,16 @@ import fr.zinecraft.core.commands.ShopCommand;
 import fr.zinecraft.core.commands.PortalCommand;
 import fr.zinecraft.core.commands.LaserCommand;
 import fr.zinecraft.core.commands.MegaHealthCommand;
+import fr.zinecraft.core.commands.DesertTeleportCommand;
 import com.zinecraft.commands.VillageCommand;
 import com.zinecraft.commands.TutorialCommand;
 import com.zinecraft.commands.ResetVillageCommand;
 import com.zinecraft.commands.VillageNPCCommand;
 import com.zinecraft.commands.VillageWallCommand;
+import com.zinecraft.commands.DeadlyDesertCommand;
 import com.zinecraft.npcs.VillageNPCManager;
 import fr.zinecraft.core.commands.QuestCommand;
+import fr.zinecraft.core.zones.SandstormManager;
 import fr.zinecraft.core.arena.ArenaManager;
 import fr.zinecraft.core.economy.EconomyManager;
 import fr.zinecraft.core.economy.ShopManager;
@@ -95,6 +99,7 @@ public class ZineCraftCore extends JavaPlugin {
     private SkillManager skillManager;
     private VillageNPCManager villageNPCManager;
     private PortalManager portalManager;
+    private SandstormManager sandstormManager;
 
     @Override
     public void onEnable() {
@@ -138,7 +143,11 @@ public class ZineCraftCore extends JavaPlugin {
         skillManager = new SkillManager(this);
         villageNPCManager = new VillageNPCManager(this);
         portalManager = new PortalManager();
+        sandstormManager = new SandstormManager(this);
         logSuccess("Managers initialized!");
+        
+        // Démarrer la tempête de sable permanente
+        sandstormManager.startSandstorm();
 
         // 4. Enregistrer les commandes
         registerCommands();
@@ -158,6 +167,11 @@ public class ZineCraftCore extends JavaPlugin {
         logInfo("");
         logInfo("Disabling ZineCraft Core...");
 
+        // Arrêter la tempête de sable
+        if (sandstormManager != null) {
+            sandstormManager.stopSandstorm();
+        }
+        
         // Arrêter les événements
         if (eventManager != null) {
             eventManager.shutdown();
@@ -310,6 +324,13 @@ public class ZineCraftCore extends JavaPlugin {
     public PortalManager getPortalManager() {
         return portalManager;
     }
+    
+    /**
+     * Récupérer le SandstormManager
+     */
+    public SandstormManager getSandstormManager() {
+        return sandstormManager;
+    }
 
     /**
      * Enregistrer toutes les commandes
@@ -347,6 +368,8 @@ public class ZineCraftCore extends JavaPlugin {
         getCommand("resetvillage").setExecutor(new ResetVillageCommand(this));
         getCommand("villagenpc").setExecutor(new VillageNPCCommand(villageNPCManager));
         getCommand("villagewall").setExecutor(new VillageWallCommand(this));
+        getCommand("desert").setExecutor(new DeadlyDesertCommand(this));
+        getCommand("tpdesert").setExecutor(new DesertTeleportCommand(this));
         getCommand("6").setExecutor(new PortalCommand());
         getCommand("laser").setExecutor(new LaserCommand());
         getCommand("mega").setExecutor(new MegaHealthCommand());
@@ -370,6 +393,7 @@ public class ZineCraftCore extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new QuestListener(this), this);
         getServer().getPluginManager().registerEvents(new EventMultiplierListener(this), this);
         getServer().getPluginManager().registerEvents(new PortalListener(), this);
+        getServer().getPluginManager().registerEvents(new DesertZoneListener(this), this);
     }
 
     /**

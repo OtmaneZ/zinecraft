@@ -122,6 +122,14 @@ commands:
     description: "Construire/supprimer les fortifications du village"
     usage: /villagewall [build|remove]
     aliases: [vwall, fortification]
+  desert:
+    description: "Générer le Désert Mortel avec pyramide et tempête de sable"
+    usage: /desert
+    aliases: [deadlydesert, desertmortel, sandstorm]
+  tpdesert:
+    description: "Se téléporter au Désert Mortel (niveau 30+ requis)"
+    usage: /tpdesert
+    aliases: [gotodesert, deserttp]
   6:
     description: Créer des portails de téléportation
     usage: /6
