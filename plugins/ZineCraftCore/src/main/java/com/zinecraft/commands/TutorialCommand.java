@@ -10,7 +10,7 @@ import org.bukkit.plugin.Plugin;
 
 /**
  * Commande pour générer la Tutorial Island
- * Coords: (0, 500) selon map_to_code.md
+ * Coords: (0, -60, 500) - Niveau débutant 1-5
  */
 public class TutorialCommand implements CommandExecutor {
 
@@ -27,15 +27,17 @@ public class TutorialCommand implements CommandExecutor {
             return true;
         }
 
-        // Coordonnées fixes selon map_to_code.md : Tutorial Island (0, 500)
+        // Coordonnées fixes : Tutorial Island (0, -60, 500)
+        // L'île sera créée AU NIVEAU -60 (niveau du sol actuel)
         Location center = new Location(player.getWorld(), 0, -60, 500);
 
-        player.sendMessage("§a[TutorialIsland] Génération de l'île tutoriel...");
-        player.sendMessage("§7Coordonnées: (0, -60, 500) - Taille: 100x100");
-        player.sendMessage("§7Niveau: 1-5 | Île surélevée Y=70");
+        player.sendMessage("§a§l[Tutorial Island] Génération de l'île...");
+        player.sendMessage("§7Coordonnées: (0, -60, 500)");
+        player.sendMessage("§7Rayon: 50 blocs | Niveau débutant (1-5)");
+        player.sendMessage("§e⏳ Cela prendra 10-20 secondes...");
 
-        // Créer et lancer le builder
-        TutorialZoneBuilder builder = new TutorialZoneBuilder(plugin, player.getWorld(), center, 80);
+        // Créer l'île avec rayon 50 (diamètre 100)
+        TutorialZoneBuilder builder = new TutorialZoneBuilder(plugin, player.getWorld(), center, 50);
         builder.generate();
 
         player.sendMessage("§a[TutorialIsland] Génération lancée en arrière-plan!");

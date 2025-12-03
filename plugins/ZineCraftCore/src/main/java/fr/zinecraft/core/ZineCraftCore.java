@@ -40,6 +40,7 @@ import fr.zinecraft.core.commands.MegaHealthCommand;
 import fr.zinecraft.core.commands.DesertTeleportCommand;
 import com.zinecraft.commands.VillageCommand;
 import com.zinecraft.commands.TutorialCommand;
+import com.zinecraft.commands.ResetTutorialCommand;
 import com.zinecraft.commands.ResetVillageCommand;
 import com.zinecraft.commands.VillageNPCCommand;
 import com.zinecraft.commands.VillageWallCommand;
@@ -145,7 +146,7 @@ public class ZineCraftCore extends JavaPlugin {
         portalManager = new PortalManager();
         sandstormManager = new SandstormManager(this);
         logSuccess("Managers initialized!");
-        
+
         // Démarrer la tempête de sable permanente
         sandstormManager.startSandstorm();
 
@@ -171,7 +172,7 @@ public class ZineCraftCore extends JavaPlugin {
         if (sandstormManager != null) {
             sandstormManager.stopSandstorm();
         }
-        
+
         // Arrêter les événements
         if (eventManager != null) {
             eventManager.shutdown();
@@ -324,7 +325,7 @@ public class ZineCraftCore extends JavaPlugin {
     public PortalManager getPortalManager() {
         return portalManager;
     }
-    
+
     /**
      * Récupérer le SandstormManager
      */
@@ -365,6 +366,7 @@ public class ZineCraftCore extends JavaPlugin {
 
         getCommand("village").setExecutor(new VillageCommand(this));
         getCommand("tutorial").setExecutor(new TutorialCommand(this));
+        getCommand("resettutorial").setExecutor(new ResetTutorialCommand(this));
         getCommand("resetvillage").setExecutor(new ResetVillageCommand(this));
         getCommand("villagenpc").setExecutor(new VillageNPCCommand(villageNPCManager));
         getCommand("villagewall").setExecutor(new VillageWallCommand(this));

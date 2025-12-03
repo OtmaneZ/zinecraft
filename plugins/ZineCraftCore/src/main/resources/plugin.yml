@@ -110,6 +110,10 @@ commands:
     description: Générer automatiquement la Tutorial Island
     usage: /tutorial
     aliases: [gentutorial, buildtutorial, tuto]
+  resettutorial:
+    description: Détruire complètement la Tutorial Island
+    usage: /resettutorial [confirm]
+    aliases: [cleantutorial, deletetutorial]
   resetvillage:
     description: Nettoyer et réinitialiser la zone du village
     usage: /resetvillage

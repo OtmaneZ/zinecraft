@@ -44,7 +44,8 @@ public class SandstormManager {
             @Override
             public void run() {
                 World world = Bukkit.getWorld("world");
-                if (world == null) return;
+                if (world == null)
+                    return;
 
                 for (Player player : Bukkit.getOnlinePlayers()) {
                     Location loc = player.getLocation();
@@ -93,13 +94,14 @@ public class SandstormManager {
     private void applyDesertEffects(Player player) {
         Location loc = player.getLocation();
         World world = loc.getWorld();
-        if (world == null) return;
+        if (world == null)
+            return;
 
         // 1. Particules de sable
         spawnSandParticles(player);
 
         // 2. Effet Slowness I (5 secondes)
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOWNESS, 100, 0, false, false));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 100, 0, false, false));
 
         // 3. Dégâts mineurs toutes les 10 secondes (25% de chance)
         if (Math.random() < 0.25) {
@@ -140,7 +142,8 @@ public class SandstormManager {
     private void spawnSandParticles(Player player) {
         Location loc = player.getLocation();
         World world = loc.getWorld();
-        if (world == null) return;
+        if (world == null)
+            return;
 
         // Particules de sable dans un rayon de 10 blocs
         for (int i = 0; i < 30; i++) {
@@ -152,13 +155,12 @@ public class SandstormManager {
 
             // Particules FALLING_DUST (sable qui tombe)
             world.spawnParticle(
-                Particle.FALLING_DUST,
-                particleLoc,
-                1,
-                0.2, 0.2, 0.2,
-                0.02,
-                Material.SAND.createBlockData()
-            );
+                    Particle.FALLING_DUST,
+                    particleLoc,
+                    1,
+                    0.2, 0.2, 0.2,
+                    0.02,
+                    Material.SAND.createBlockData());
         }
 
         // Particules supplémentaires proches
@@ -170,12 +172,11 @@ public class SandstormManager {
             Location particleLoc = loc.clone().add(offsetX, offsetY, offsetZ);
 
             world.spawnParticle(
-                Particle.CLOUD,
-                particleLoc,
-                1,
-                0.1, 0.1, 0.1,
-                0.01
-            );
+                    Particle.CLOUD,
+                    particleLoc,
+                    1,
+                    0.1, 0.1, 0.1,
+                    0.01);
         }
     }
 
@@ -208,7 +209,8 @@ public class SandstormManager {
      */
     public Location getDesertCenter() {
         World world = Bukkit.getWorld("world");
-        if (world == null) return null;
+        if (world == null)
+            return null;
         return new Location(world, DESERT_CENTER_X, 67, DESERT_CENTER_Z);
     }
 }
